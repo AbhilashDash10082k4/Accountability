@@ -8,6 +8,3 @@ module.exports = defineConfig([
     ignores: ['dist/*'],
   },
 ]);
-LogBox.ignoreLogs([
-  '[Reanimated] Reduced motion setting is enabled on this device.',
-]);
