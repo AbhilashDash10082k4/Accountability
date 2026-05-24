@@ -211,22 +211,6 @@ export default function WelcomeScreen() {
               </Pressable>
             </BlurView>
           </View>
-
-          {/* Minimalist Progress Indicators */}
-          <View className="mt-8 flex-row items-center gap-1.5">
-            <View
-              className="w-6 h-1.5 rounded-full bg-secondary"
-              style={{
-                shadowColor: "#44e2cd",
-                shadowOffset: { width: 0, height: 0 },
-                shadowOpacity: 0.4,
-                shadowRadius: 8,
-              }}
-            />
-            <View className="w-1.5 h-1.5 rounded-full bg-surface-variant/50" />
-            <View className="w-1.5 h-1.5 rounded-full bg-surface-variant/50" />
-            <View className="w-1.5 h-1.5 rounded-full bg-surface-variant/50" />
-          </View>
         </View>
       </ScrollView>
 
