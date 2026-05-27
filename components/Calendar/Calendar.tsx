@@ -1,0 +1,253 @@
+import React, { useState, useEffect } from "react";
+import { View, Pressable, Text, BackHandler } from "react-native";
+import { useRouter, Stack } from "expo-router";
+import { BlurView } from "expo-blur";
+import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
+import * as ExpoCalendar from "expo-calendar";
+
+import CalendarHeader from "./CalendarHeader";
+import MonthView from "./MonthView";
+import HourlyView from "./HourlyView";
+import { TimelineEvent } from "@/utils/interfaces";
+import { mockEvents, monthNames } from "@/constants/mockEvents";
+
+export default function GoogleCalendarComponent() {
+  const router = useRouter();
+  const [viewMode, setViewMode] = useState<"month" | "day">("month");
+
+  useEffect(() => {
+    const onBackPress = () => {
+      if (viewMode === "day") {
+        setViewMode("month");
+        return true;
+      }
+      return false;
+    };
+    const subscription = BackHandler.addEventListener(
+      "hardwareBackPress",
+      onBackPress,
+    );
+    return () => subscription.remove();
+  }, [viewMode]);
+  // Set default initial date to May 26, 2026 (matching the screenshots)
+  const [currentDate, setCurrentDate] = useState<Date>(new Date(2026, 4, 26));
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date(2026, 4, 26));
+
+  const [events, setEvents] = useState<TimelineEvent[]>(mockEvents);
+
+  // Load actual calendar events on mount if permissions granted
+  useEffect(() => {
+    (async () => {
+      try {
+        const { status } = await ExpoCalendar.requestCalendarPermissionsAsync();
+        if (status === "granted") {
+          const calendars = await ExpoCalendar.getCalendarsAsync(
+            ExpoCalendar.EntityTypes.EVENT,
+          );
+          const calendarIds = calendars.map((cal) => cal.id);
+
+          if (calendarIds.length > 0) {
+            const start = new Date(2026, 4, 1);
+            const end = new Date(2026, 5, 0); // End of May
+
+            const fetchedEvents = await ExpoCalendar.getEventsAsync(
+              calendarIds,
+              start,
+              end,
+            );
+
+            const mapped: TimelineEvent[] = fetchedEvents.map((evt) => {
+              const startDate = new Date(evt.startDate);
+              const hours = String(startDate.getHours()).padStart(2, "0");
+              const minutes = String(startDate.getMinutes()).padStart(2, "0");
+              return {
+                id: evt.id,
+                title: evt.title,
+                time: `${hours}:${minutes}`,
+                description: evt.notes || "Device Event",
+                location: evt.location || undefined,
+                type: "device",
+                iconName: "calendar-clock",
+              };
+            });
+
+            setEvents((prev) => [...mapped, ...prev]);
+          }
+        }
+      } catch (err) {
+        console.warn("Failed to load device events:", err);
+      }
+    })();
+  }, []);
+
+  const handlePrevMonth = () => {
+    setCurrentDate((prev) => {
+      const copy = new Date(prev);
+      copy.setMonth(prev.getMonth() - 1);
+      return copy;
+    });
+  };
+
+  const handleNextMonth = () => {
+    setCurrentDate((prev) => {
+      const copy = new Date(prev);
+      copy.setMonth(prev.getMonth() + 1);
+      return copy;
+    });
+  };
+
+  const handleSelectToday = () => {
+    const today = new Date();
+    setCurrentDate(today);
+    setSelectedDate(today);
+    setViewMode("day");
+  };
+
+  const handleDaySelect = (date: Date) => {
+    setSelectedDate(date);
+    setViewMode("day");
+  };
+
+  const handleEventMove = (eventId: string, newTime: string) => {
+    setEvents((prev) =>
+      prev.map((evt) => (evt.id === eventId ? { ...evt, time: newTime } : evt)),
+    );
+  };
+
+  const handleAddEvent = () => {
+    // Adds a quick mock event for testing
+    const newEvent: TimelineEvent = {
+      id: `custom-${Date.now()}`,
+      title: "New Custom Event",
+      time: "15:00",
+      type: "deep-work",
+      iconName: "shield-star",
+      description: "Tap and hold to drag and reschedule me!",
+    };
+    setEvents((prev) => [newEvent, ...prev]);
+    setViewMode("day");
+  };
+
+  return (
+    <View className="flex-1 bg-background">
+      <Stack.Screen
+        options={{
+          headerShown: false,
+          gestureEnabled: viewMode === "month",
+        }}
+      />
+      {/* Calendar Header component */}
+      <CalendarHeader
+        currentMonthName={monthNames[currentDate.getMonth()]}
+        currentYear={currentDate.getFullYear()}
+        onPrevMonth={handlePrevMonth}
+        onNextMonth={handleNextMonth}
+        onSelectToday={handleSelectToday}
+        onBackPress={
+          viewMode === "day" ? () => setViewMode("month") : undefined
+        }
+        onTasksPress={() => router.push("/todo")}
+      />
+
+      {/* Main Mode Toggle Switch */}
+      {viewMode === "month" ? (
+        <MonthView
+          currentDate={currentDate}
+          events={events}
+          onDaySelect={handleDaySelect}
+        />
+      ) : (
+        <HourlyView
+          selectedDate={selectedDate}
+          events={events}
+          onEventMove={handleEventMove}
+        />
+      )}
+
+      {/* Floating Add Action Button */}
+      <Pressable
+        onPress={handleAddEvent}
+        className="absolute bottom-24 right-6 w-14 h-14 bg-amber-500 rounded-[20px] shadow-2xl items-center justify-center z-40 active:scale-95 shadow-black/40"
+      >
+        <Ionicons name="add" size={32} color="#051424" />
+      </Pressable>
+
+      {/* Bottom Navigation tab bar */}
+      <View className="absolute bottom-0 left-0 w-full z-50 rounded-t-xl border-t h-20 px-4 flex-row justify-around items-center bg-background/60 border-t-white/10">
+        <BlurView
+          tint="dark"
+          intensity={100}
+          style={{ position: "absolute", top: 0, bottom: 0, left: 0, right: 0 }}
+        />
+
+        <Pressable
+          onPress={() => router.push("/")}
+          className="items-center justify-center w-16 h-12 active:opacity-75"
+        >
+          <MaterialCommunityIcons
+            name="home-outline"
+            size={24}
+            color="rgba(255, 255, 255, 0.4)"
+          />
+          <Text className="text-[10px] font-semibold text-on-surface-variant/40 mt-1 font-geist">
+            Home
+          </Text>
+        </Pressable>
+
+        <Pressable
+          onPress={() => setViewMode("month")}
+          className="items-center justify-center w-16 h-12 active:opacity-75"
+        >
+          <MaterialCommunityIcons
+            name="calendar-month-outline"
+            size={24}
+            color={
+              viewMode === "month" ? "#44e2cd" : "rgba(255, 255, 255, 0.4)"
+            }
+          />
+          <Text
+            className={`text-[10px] font-semibold mt-1 font-geist ${viewMode === "month" ? "text-secondary" : "text-on-surface-variant/40"}`}
+          >
+            Habits
+          </Text>
+        </Pressable>
+
+        <Pressable
+          onPress={() => router.push("/todo")}
+          className="items-center justify-center w-16 h-12 scale-110 active:opacity-75"
+        >
+          <MaterialCommunityIcons
+            name="check-circle"
+            size={24}
+            color="rgba(255, 255, 255, 0.4)"
+          />
+          <Text className="text-[10px] font-semibold text-on-surface-variant/40 mt-1 font-geist">
+            Tasks
+          </Text>
+        </Pressable>
+
+        <Pressable className="items-center justify-center w-16 h-12 active:opacity-75">
+          <MaterialCommunityIcons
+            name="handshake-outline"
+            size={24}
+            color="rgba(255, 255, 255, 0.4)"
+          />
+          <Text className="text-[10px] font-semibold text-on-surface-variant/40 mt-1 font-geist">
+            Partners
+          </Text>
+        </Pressable>
+
+        <Pressable className="items-center justify-center w-16 h-12 active:opacity-75">
+          <MaterialCommunityIcons
+            name="account-outline"
+            size={24}
+            color="rgba(255, 255, 255, 0.4)"
+          />
+          <Text className="text-[10px] font-semibold text-on-surface-variant/40 mt-1 font-geist">
+            Profile
+          </Text>
+        </Pressable>
+      </View>
+    </View>
+  );
+}
