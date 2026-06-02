@@ -2,7 +2,7 @@ import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
 import * as ExpoCalendar from "expo-calendar";
 import { Stack, useRouter } from "expo-router";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { BackHandler, Pressable, Text, View } from "react-native";
 
 import { mockEvents, monthNames } from "@/constants/mockEvents";
@@ -19,6 +19,10 @@ export default function GoogleCalendarComponent() {
     const onBackPress = () => {
       if (viewMode === "day") {
         setViewMode("month");
+        return true;
+      }
+      if (viewMode === "month") {
+        handlePrevMonth();
         return true;
       }
       return false;
