@@ -4,9 +4,10 @@ export interface TimelineEvent {
   time: string;
   duration?: string;
   description?: string;
-  type: "habit" | "deadline" | "deep-work" | "completed" | "device";
+  type: "habit" | "deadline" | "deep-work" | "completed" | "device" | "task";
   location?: string;
   iconName?: string;
+  date?: string;
 }
 
 export interface CalendarHeaderProps {
@@ -30,6 +31,7 @@ export interface HourlyViewProps {
   selectedDate: Date;
   events: TimelineEvent[];
   onEventMove: (eventId: string, newTime: string) => void;
+  onAddEvent?: (newEvent: TimelineEvent) => void;
 }
 export interface MonthViewProps {
   currentDate: Date;

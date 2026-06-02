@@ -37,6 +37,14 @@ export default function MonthView({
   // Helper to filter events for a specific date
   const getEventsForDate = (date: Date) => {
     return events.filter((evt) => {
+      if (evt.date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+        const dateKey = `${year}-${month}-${day}`;
+        return evt.date === dateKey;
+      }
+
       // If mock event, we hardcode mock dates or map them to the corresponding calendar date
       if (evt.id.startsWith("mock-")) {
         // Map mock events:

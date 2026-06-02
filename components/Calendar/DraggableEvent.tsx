@@ -25,8 +25,8 @@ export default function DraggableEvent({
   const initialHour = parseTime(event.time);
   const initialTop = initialHour * hourHeight;
 
-  // Determine height based on event length (Dinner, chess is 2 hours, others 1 hour)
-  const eventDurationHours = event.title === "Dinner, chess" ? 2 : 1;
+  // Determine height based on event length (supporting dynamic duration)
+  const eventDurationHours = event.duration ? parseFloat(event.duration) : (event.title === "Dinner, chess" ? 2 : 1);
   const cardHeight = eventDurationHours * hourHeight - 8; // Small margin top/bottom
 
   // Animation values
@@ -109,18 +109,27 @@ export default function DraggableEvent({
   ).current;
 
   // Visual customizer based on type
-  let colorClasses = "bg-sky-500/20 border-sky-500/40 text-sky-200";
+  let colorClasses = "bg-sky-500/20 border-sky-500/40";
+  let textColorClass = "text-on-surface";
+  let descColorClass = "text-on-surface-variant";
   let iconColor = "#38bdf8";
+
   if (event.type === "deadline") {
-    colorClasses = "bg-rose-500/20 border-rose-500/40 text-rose-200";
+    colorClasses = "bg-rose-500/20 border-rose-500/40";
     iconColor = "#fb7185";
   } else if (event.type === "habit") {
-    colorClasses = "bg-teal-500/20 border-teal-500/40 text-teal-200";
+    colorClasses = "bg-teal-500/20 border-teal-500/40";
     iconColor = "#2dd4bf";
   } else if (event.type === "completed") {
-    colorClasses =
-      "bg-white/5 border-white/10 text-on-surface-variant/40 line-through opacity-40";
+    colorClasses = "bg-white/5 border-white/10 opacity-40";
+    textColorClass = "text-on-surface-variant/40 line-through";
+    descColorClass = "text-on-surface-variant/20 line-through";
     iconColor = "#94a3b8";
+  } else if (event.type === "task") {
+    colorClasses = "bg-secondary border-secondary/60";
+    textColorClass = "text-[#00201c]";
+    descColorClass = "text-[#00201c]/80";
+    iconColor = "#00201c";
   }
 
   return (
@@ -140,7 +149,7 @@ export default function DraggableEvent({
       <View>
         <View className="flex-row justify-between items-start">
           <Text
-            className="text-base font-bold text-on-surface font-inter"
+            className={`text-base font-bold font-inter ${textColorClass}`}
             style={{ flexShrink: 1 }}
           >
             {event.title}
@@ -156,7 +165,7 @@ export default function DraggableEvent({
 
         {event.description && (
           <Text
-            className="text-xs text-on-surface-variant font-geist mt-1"
+            className={`text-xs font-geist mt-1 ${descColorClass}`}
             numberOfLines={2}
           >
             {event.description}
@@ -164,8 +173,12 @@ export default function DraggableEvent({
         )}
       </View>
 
-      <View className="flex-row justify-between items-center mt-2 border-t border-white/5 pt-2">
-        <Text className="text-[10px] font-semibold text-on-surface-variant font-geist">
+      <View
+        className={`flex-row justify-between items-center mt-2 border-t pt-2 ${
+          event.type === "task" ? "border-[#00201c]/10" : "border-white/5"
+        }`}
+      >
+        <Text className={`text-[10px] font-semibold font-geist ${descColorClass}`}>
           {event.time} ({eventDurationHours} hr
           {eventDurationHours > 1 ? "s" : ""})
         </Text>

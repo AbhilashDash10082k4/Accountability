@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { View, Pressable, Text, BackHandler } from "react-native";
-import { useRouter, Stack } from "expo-router";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
-import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
 import * as ExpoCalendar from "expo-calendar";
+import { Stack, useRouter } from "expo-router";
+import React, { useEffect, useState } from "react";
+import { BackHandler, Pressable, Text, View } from "react-native";
 
-import CalendarHeader from "./CalendarHeader";
-import MonthView from "./MonthView";
-import HourlyView from "./HourlyView";
-import { TimelineEvent } from "@/utils/interfaces";
 import { mockEvents, monthNames } from "@/constants/mockEvents";
+import { TimelineEvent } from "@/utils/interfaces";
+import CalendarHeader from "./CalendarHeader";
+import HourlyView from "./HourlyView";
+import MonthView from "./MonthView";
 
 export default function GoogleCalendarComponent() {
   const router = useRouter();
@@ -29,9 +29,17 @@ export default function GoogleCalendarComponent() {
     );
     return () => subscription.remove();
   }, [viewMode]);
-  // Set default initial date to May 26, 2026 (matching the screenshots)
-  const [currentDate, setCurrentDate] = useState<Date>(new Date(2026, 4, 26));
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date(2026, 4, 26));
+  // Set default initial date to present day
+  const [currentDate, setCurrentDate] = useState<Date>(() => {
+    const d = new Date();
+    d.setHours(0, 0, 0, 0);
+    return d;
+  });
+  const [selectedDate, setSelectedDate] = useState<Date>(() => {
+    const d = new Date();
+    d.setHours(0, 0, 0, 0);
+    return d;
+  });
 
   const [events, setEvents] = useState<TimelineEvent[]>(mockEvents);
 
@@ -84,6 +92,7 @@ export default function GoogleCalendarComponent() {
     setCurrentDate((prev) => {
       const copy = new Date(prev);
       copy.setMonth(prev.getMonth() - 1);
+      copy.setHours(0, 0, 0, 0);
       return copy;
     });
   };
@@ -92,12 +101,14 @@ export default function GoogleCalendarComponent() {
     setCurrentDate((prev) => {
       const copy = new Date(prev);
       copy.setMonth(prev.getMonth() + 1);
+      copy.setHours(0, 0, 0, 0);
       return copy;
     });
   };
 
   const handleSelectToday = () => {
     const today = new Date();
+    today.setHours(0, 0, 0, 0);
     setCurrentDate(today);
     setSelectedDate(today);
     setViewMode("day");
@@ -161,6 +172,7 @@ export default function GoogleCalendarComponent() {
           selectedDate={selectedDate}
           events={events}
           onEventMove={handleEventMove}
+          onAddEvent={(newEvent) => setEvents((prev) => [newEvent, ...prev])}
         />
       )}
 
