@@ -70,14 +70,14 @@ export default function MonthView({
             return (
               evt.id === "mock-1" ||
               evt.id === "mock-2" ||
-              evt.title.startsWith("Due:") ||
+              evt.title?.startsWith("Due:") ||
               evt.title === "Sleep" ||
               evt.title === "Mrng routin" ||
               evt.title === "Stage32 Did"
             );
           }
           if (day === 28 && evt.title === "Bakrid") return true;
-          if (day === 29 && evt.title.startsWith("Bus to Bhub")) return true;
+          if (day === 29 && evt.title?.startsWith("Bus to Bhub")) return true;
           if (day === 1 && evt.title === "Buddha Pur") return true;
         }
         return false;
@@ -157,7 +157,7 @@ export default function MonthView({
                   let textColor = "text-sky-300";
                   let borderColor = "border-sky-500/30";
 
-                  if (evt.title.startsWith("Due:") || evt.type === "deadline") {
+                  if (evt.title?.startsWith("Due:") || evt.type === "deadline") {
                     bgColor = "bg-rose-500/20";
                     textColor = "text-rose-300";
                     borderColor = "border-rose-500/30";

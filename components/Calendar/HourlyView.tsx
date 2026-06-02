@@ -102,14 +102,14 @@ export default function HourlyView({
             return (
               evt.id === "mock-1" ||
               evt.id === "mock-2" ||
-              evt.title.startsWith("Due:") ||
+              evt.title?.startsWith("Due:") ||
               evt.title === "Sleep" ||
               evt.title === "Mrng routin" ||
               evt.title === "Stage32 Did"
             );
           }
           if (day === 28 && evt.title === "Bakrid") return true;
-          if (day === 29 && evt.title.startsWith("Bus to Bhub")) return true;
+          if (day === 29 && evt.title?.startsWith("Bus to Bhub")) return true;
           if (day === 1 && evt.title === "Buddha Pur") return true;
         }
         return false;

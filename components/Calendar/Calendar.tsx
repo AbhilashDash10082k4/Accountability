@@ -2,7 +2,7 @@ import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
 import * as ExpoCalendar from "expo-calendar";
 import { Stack, useRouter } from "expo-router";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { BackHandler, Pressable, Text, View } from "react-native";
 
 import { mockEvents, monthNames } from "@/constants/mockEvents";
@@ -15,10 +15,45 @@ export default function GoogleCalendarComponent() {
   const router = useRouter();
   const [viewMode, setViewMode] = useState<"month" | "day">("month");
 
+  // Set default initial date to present day
+  const [currentDate, setCurrentDate] = useState<Date>(() => {
+    const d = new Date();
+    d.setHours(0, 0, 0, 0);
+    return d;
+  });
+  const [selectedDate, setSelectedDate] = useState<Date>(() => {
+    const d = new Date();
+    d.setHours(0, 0, 0, 0);
+    return d;
+  });
+
+  const handlePrevMonth = useCallback(() => {
+    setCurrentDate((prev) => {
+      if (!prev || !(prev instanceof Date) || isNaN(prev.getTime())) {
+        return new Date();
+      }
+      const copy = new Date(prev);
+      copy.setMonth(prev.getMonth() - 1);
+      return copy;
+    });
+  }, []);
+
+  const handleNextMonth = useCallback(() => {
+    setCurrentDate((prev) => {
+      if (!prev || !(prev instanceof Date) || isNaN(prev.getTime())) {
+        return new Date();
+      }
+      const copy = new Date(prev);
+      copy.setMonth(prev.getMonth() + 1);
+      return copy;
+    });
+  }, []);
+
   useEffect(() => {
     const onBackPress = () => {
       if (viewMode === "day") {
         setViewMode("month");
+        setCurrentDate(selectedDate);
         return true;
       }
       if (viewMode === "month") {
@@ -32,18 +67,7 @@ export default function GoogleCalendarComponent() {
       onBackPress,
     );
     return () => subscription.remove();
-  }, [viewMode]);
-  // Set default initial date to present day
-  const [currentDate, setCurrentDate] = useState<Date>(() => {
-    const d = new Date();
-    d.setHours(0, 0, 0, 0);
-    return d;
-  });
-  const [selectedDate, setSelectedDate] = useState<Date>(() => {
-    const d = new Date();
-    d.setHours(0, 0, 0, 0);
-    return d;
-  });
+  }, [viewMode, handlePrevMonth, selectedDate]);
 
   const [events, setEvents] = useState<TimelineEvent[]>(mockEvents);
 
@@ -92,22 +116,6 @@ export default function GoogleCalendarComponent() {
     })();
   }, []);
 
-  const handlePrevMonth = () => {
-    setCurrentDate((prev) => {
-      const copy = new Date(prev);
-      copy.setMonth(prev.getMonth() - 1);
-      return copy;
-    });
-  };
-
-  const handleNextMonth = () => {
-    setCurrentDate((prev) => {
-      const copy = new Date(prev);
-      copy.setMonth(prev.getMonth() + 1);
-      return copy;
-    });
-  };
-
   const handleSelectToday = () => {
     const today = new Date();
     setCurrentDate(today);
@@ -117,6 +125,7 @@ export default function GoogleCalendarComponent() {
 
   const handleDaySelect = (date: Date) => {
     setSelectedDate(date);
+    setCurrentDate(date);
     setViewMode("day");
   };
 

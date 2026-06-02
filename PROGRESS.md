@@ -409,6 +409,46 @@ Use custom circular dial SVG-like layout using absolute React Native elements.
 Integrate calendar task persistence database.
 ```
 
+## Session #003
+
+### Date
+
+```text
+2026-06-02
+```
+
+### Work Completed
+
+```text
+Fixed bugs in calendar month transitions and hardware backpress handlers.
+Wrapped handlePrevMonth and handleNextMonth in useCallback.
+Added missing dependency array declarations in useEffect.
+Synced currentDate state with selectedDate to ensure month view updates.
+Added optional chaining to startsWith comparisons for title properties to prevent crashes on undefined values.
+```
+
+### Files Modified
+
+```text
+components/Calendar/Calendar.tsx
+components/Calendar/MonthView.tsx
+components/Calendar/HourlyView.tsx
+```
+
+### Decisions Made
+
+```text
+Ensure currentDate updates alongside selectedDate to avoid month mismatch.
+Use stable callback references to avoid stale hook closures.
+```
+
+### Next Session Should Start With
+
+```text
+Integrate calendar task persistence database.
+```
+
+
 # 🎯 DEFINITION OF CURRENT MVP
 
 Current MVP is complete when:
