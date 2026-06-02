@@ -12,6 +12,7 @@ export default function WelcomeScreen() {
   const [isPressed, setIsPressed] = useState(false);
 
   // Animation values
+
   const toastOpacity = useRef(new Animated.Value(0)).current;
   const toastTranslateY = useRef(new Animated.Value(20)).current;
   const buttonScale = useRef(new Animated.Value(1)).current;
