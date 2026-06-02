@@ -92,7 +92,6 @@ export default function GoogleCalendarComponent() {
     setCurrentDate((prev) => {
       const copy = new Date(prev);
       copy.setMonth(prev.getMonth() - 1);
-      copy.setHours(0, 0, 0, 0);
       return copy;
     });
   };
@@ -101,14 +100,12 @@ export default function GoogleCalendarComponent() {
     setCurrentDate((prev) => {
       const copy = new Date(prev);
       copy.setMonth(prev.getMonth() + 1);
-      copy.setHours(0, 0, 0, 0);
       return copy;
     });
   };
 
   const handleSelectToday = () => {
     const today = new Date();
-    today.setHours(0, 0, 0, 0);
     setCurrentDate(today);
     setSelectedDate(today);
     setViewMode("day");
