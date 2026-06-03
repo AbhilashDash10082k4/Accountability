@@ -1,0 +1,166 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "./prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+/**
+ * User
+ * ├─ Aim
+ * ├─ Tasks
+ * ├─ Proofs
+ * ├─ FocusSessions
+ * relations -
+ * 1 user -many tasks, many proofs
+ * 1 task - multiple proofs
+ * 1 proof type -many tasks related
+ */
+model User {
+  id            String         @id @default(uuid())
+  name          String
+  aims          Aim[]
+  tasks         Task[]
+  proofs        Proof[]
+  focusSessions FocusSession[]
+}
+
+model Aim {
+  id          String    @id @default(uuid())
+  title       String
+  description String
+  status      AimStatus @default(ACTIVE)
+  deadline    DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  tasks       Task[]
+}
+
+model Task {
+  id            String            @id @default(uuid())
+  title         String
+  description   String
+  created_at    DateTime          @default(now())
+  durationMins  Int
+  startTime     DateTime
+  endTime       DateTime?
+  is_completed  Boolean           @default(false)
+  userId        String
+  user          User              @relation(fields: [userId], references: [id])
+  aimId         String?
+  aim           Aim?              @relation(fields: [aimId], references: [id])
+  proofs        Proof[]
+  verifications Verification[]
+  focusSessions FocusSession[]
+  activityLogs  TaskActivityLog[]
+  TaskSessionss TaskSessions[]
+}
+
+model Proof {
+  id            String         @id @default(uuid())
+  proofData     String
+  taskId        String
+  task          Task           @relation(fields: [taskId], references: [id])
+  userId        String
+  user          User           @relation(fields: [userId], references: [id])
+  verifications Verification[]
+}
+
+model Verification {
+  id          String             @id @default(uuid())
+  status      VerificationStatus
+  confidence  Float?
+  reason      String?
+  rawResponse Json?
+  verifiedAt  DateTime?
+  taskId      String
+  task        Task               @relation(fields: [taskId], references: [id])
+  proofId     String
+  proof       Proof              @relation(fields: [proofId], references: [id])
+}
+
+model TaskActivityLog {
+  id        String   @id @default(uuid())
+  taskId    String
+  task      Task     @relation(fields: [taskId], references: [id])
+  action    String
+  metadata  Json?
+  createdAt DateTime @default(now())
+}
+
+model FocusSession {
+  id          String             @id @default(uuid())
+  title       String
+  startTime   DateTime
+  endTime     DateTime?
+  status      FocusSessionStatus
+  createdAt   DateTime           @default(now())
+  userId      String
+  user        User               @relation(fields: [userId], references: [id])
+  tasks       TaskSessions[]
+  blockedApps BlockedApp[]
+  task        Task               @relation(fields: [taskId], references: [id])
+  taskId      String
+}
+
+model TaskSessions {
+  id             String       @id @default(uuid())
+  focusSessionId String
+  taskId         String
+  focusSession   FocusSession @relation(fields: [focusSessionId], references: [id])
+  task           Task         @relation(fields: [taskId], references: [id])
+  assignedAt     DateTime     @default(now())
+
+  @@unique([focusSessionId, taskId])
+}
+
+model BlockedApp {
+  id             String       @id @default(uuid())
+  appName        String
+  packageName    String
+  focusSessionId String
+  focusSession   FocusSession @relation(fields: [focusSessionId], references: [id])
+}
+
+enum AimStatus {
+  ACTIVE
+  COMPLETED
+}
+
+enum TaskStatus {
+  PENDING
+  IN_PROGRESS
+  PROOF_PENDING
+  VERIFICATION_PENDING
+  COMPLETED
+  FAILED
+}
+
+enum VerificationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum FocusSessionStatus {
+  ACTIVE
+  PAUSED
+  COMPLETED
+}
+
+enum VerifierType {
+  HUMAN
+  AI
+  GITHUB
+  GMAIL
+  VIDEO_ANALYSIS
+}
