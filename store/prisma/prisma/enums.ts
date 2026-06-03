@@ -56,13 +56,3 @@ export const VerifierType = {
 } as const
 
 export type VerifierType = (typeof VerifierType)[keyof typeof VerifierType]
-
-
-export const Types = {
-  GithubLink: 'GithubLink',
-  DeployedLink: 'DeployedLink',
-  Video: 'Video',
-  Email: 'Email'
-} as const
-
-export type Types = (typeof Types)[keyof typeof Types]

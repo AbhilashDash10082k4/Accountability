@@ -29,7 +29,6 @@ export type ProofMinAggregateOutputType = {
   proofData: string | null
   taskId: string | null
   userId: string | null
-  proofTypeId: string | null
 }
 
 export type ProofMaxAggregateOutputType = {
@@ -37,7 +36,6 @@ export type ProofMaxAggregateOutputType = {
   proofData: string | null
   taskId: string | null
   userId: string | null
-  proofTypeId: string | null
 }
 
 export type ProofCountAggregateOutputType = {
@@ -45,7 +43,6 @@ export type ProofCountAggregateOutputType = {
   proofData: number
   taskId: number
   userId: number
-  proofTypeId: number
   _all: number
 }
 
@@ -55,7 +52,6 @@ export type ProofMinAggregateInputType = {
   proofData?: true
   taskId?: true
   userId?: true
-  proofTypeId?: true
 }
 
 export type ProofMaxAggregateInputType = {
@@ -63,7 +59,6 @@ export type ProofMaxAggregateInputType = {
   proofData?: true
   taskId?: true
   userId?: true
-  proofTypeId?: true
 }
 
 export type ProofCountAggregateInputType = {
@@ -71,7 +66,6 @@ export type ProofCountAggregateInputType = {
   proofData?: true
   taskId?: true
   userId?: true
-  proofTypeId?: true
   _all?: true
 }
 
@@ -152,7 +146,6 @@ export type ProofGroupByOutputType = {
   proofData: string
   taskId: string
   userId: string
-  proofTypeId: string
   _count: ProofCountAggregateOutputType | null
   _min: ProofMinAggregateOutputType | null
   _max: ProofMaxAggregateOutputType | null
@@ -181,10 +174,8 @@ export type ProofWhereInput = {
   proofData?: Prisma.StringFilter<"Proof"> | string
   taskId?: Prisma.StringFilter<"Proof"> | string
   userId?: Prisma.StringFilter<"Proof"> | string
-  proofTypeId?: Prisma.StringFilter<"Proof"> | string
   task?: Prisma.XOR<Prisma.TaskScalarRelationFilter, Prisma.TaskWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  proofType?: Prisma.XOR<Prisma.ProofTypeScalarRelationFilter, Prisma.ProofTypeWhereInput>
   verifications?: Prisma.VerificationListRelationFilter
 }
 
@@ -193,10 +184,8 @@ export type ProofOrderByWithRelationInput = {
   proofData?: Prisma.SortOrder
   taskId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  proofTypeId?: Prisma.SortOrder
   task?: Prisma.TaskOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
-  proofType?: Prisma.ProofTypeOrderByWithRelationInput
   verifications?: Prisma.VerificationOrderByRelationAggregateInput
 }
 
@@ -208,10 +197,8 @@ export type ProofWhereUniqueInput = Prisma.AtLeast<{
   proofData?: Prisma.StringFilter<"Proof"> | string
   taskId?: Prisma.StringFilter<"Proof"> | string
   userId?: Prisma.StringFilter<"Proof"> | string
-  proofTypeId?: Prisma.StringFilter<"Proof"> | string
   task?: Prisma.XOR<Prisma.TaskScalarRelationFilter, Prisma.TaskWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  proofType?: Prisma.XOR<Prisma.ProofTypeScalarRelationFilter, Prisma.ProofTypeWhereInput>
   verifications?: Prisma.VerificationListRelationFilter
 }, "id">
 
@@ -220,7 +207,6 @@ export type ProofOrderByWithAggregationInput = {
   proofData?: Prisma.SortOrder
   taskId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  proofTypeId?: Prisma.SortOrder
   _count?: Prisma.ProofCountOrderByAggregateInput
   _max?: Prisma.ProofMaxOrderByAggregateInput
   _min?: Prisma.ProofMinOrderByAggregateInput
@@ -234,7 +220,6 @@ export type ProofScalarWhereWithAggregatesInput = {
   proofData?: Prisma.StringWithAggregatesFilter<"Proof"> | string
   taskId?: Prisma.StringWithAggregatesFilter<"Proof"> | string
   userId?: Prisma.StringWithAggregatesFilter<"Proof"> | string
-  proofTypeId?: Prisma.StringWithAggregatesFilter<"Proof"> | string
 }
 
 export type ProofCreateInput = {
@@ -242,7 +227,6 @@ export type ProofCreateInput = {
   proofData: string
   task: Prisma.TaskCreateNestedOneWithoutProofsInput
   user: Prisma.UserCreateNestedOneWithoutProofsInput
-  proofType: Prisma.ProofTypeCreateNestedOneWithoutProofsInput
   verifications?: Prisma.VerificationCreateNestedManyWithoutProofInput
 }
 
@@ -251,7 +235,6 @@ export type ProofUncheckedCreateInput = {
   proofData: string
   taskId: string
   userId: string
-  proofTypeId: string
   verifications?: Prisma.VerificationUncheckedCreateNestedManyWithoutProofInput
 }
 
@@ -260,7 +243,6 @@ export type ProofUpdateInput = {
   proofData?: Prisma.StringFieldUpdateOperationsInput | string
   task?: Prisma.TaskUpdateOneRequiredWithoutProofsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutProofsNestedInput
-  proofType?: Prisma.ProofTypeUpdateOneRequiredWithoutProofsNestedInput
   verifications?: Prisma.VerificationUpdateManyWithoutProofNestedInput
 }
 
@@ -269,7 +251,6 @@ export type ProofUncheckedUpdateInput = {
   proofData?: Prisma.StringFieldUpdateOperationsInput | string
   taskId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  proofTypeId?: Prisma.StringFieldUpdateOperationsInput | string
   verifications?: Prisma.VerificationUncheckedUpdateManyWithoutProofNestedInput
 }
 
@@ -278,7 +259,6 @@ export type ProofCreateManyInput = {
   proofData: string
   taskId: string
   userId: string
-  proofTypeId: string
 }
 
 export type ProofUpdateManyMutationInput = {
@@ -291,7 +271,6 @@ export type ProofUncheckedUpdateManyInput = {
   proofData?: Prisma.StringFieldUpdateOperationsInput | string
   taskId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  proofTypeId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ProofListRelationFilter = {
@@ -309,7 +288,6 @@ export type ProofCountOrderByAggregateInput = {
   proofData?: Prisma.SortOrder
   taskId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  proofTypeId?: Prisma.SortOrder
 }
 
 export type ProofMaxOrderByAggregateInput = {
@@ -317,7 +295,6 @@ export type ProofMaxOrderByAggregateInput = {
   proofData?: Prisma.SortOrder
   taskId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  proofTypeId?: Prisma.SortOrder
 }
 
 export type ProofMinOrderByAggregateInput = {
@@ -325,7 +302,6 @@ export type ProofMinOrderByAggregateInput = {
   proofData?: Prisma.SortOrder
   taskId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  proofTypeId?: Prisma.SortOrder
 }
 
 export type ProofScalarRelationFilter = {
@@ -417,48 +393,6 @@ export type ProofUncheckedUpdateManyWithoutTaskNestedInput = {
   deleteMany?: Prisma.ProofScalarWhereInput | Prisma.ProofScalarWhereInput[]
 }
 
-export type ProofCreateNestedManyWithoutProofTypeInput = {
-  create?: Prisma.XOR<Prisma.ProofCreateWithoutProofTypeInput, Prisma.ProofUncheckedCreateWithoutProofTypeInput> | Prisma.ProofCreateWithoutProofTypeInput[] | Prisma.ProofUncheckedCreateWithoutProofTypeInput[]
-  connectOrCreate?: Prisma.ProofCreateOrConnectWithoutProofTypeInput | Prisma.ProofCreateOrConnectWithoutProofTypeInput[]
-  createMany?: Prisma.ProofCreateManyProofTypeInputEnvelope
-  connect?: Prisma.ProofWhereUniqueInput | Prisma.ProofWhereUniqueInput[]
-}
-
-export type ProofUncheckedCreateNestedManyWithoutProofTypeInput = {
-  create?: Prisma.XOR<Prisma.ProofCreateWithoutProofTypeInput, Prisma.ProofUncheckedCreateWithoutProofTypeInput> | Prisma.ProofCreateWithoutProofTypeInput[] | Prisma.ProofUncheckedCreateWithoutProofTypeInput[]
-  connectOrCreate?: Prisma.ProofCreateOrConnectWithoutProofTypeInput | Prisma.ProofCreateOrConnectWithoutProofTypeInput[]
-  createMany?: Prisma.ProofCreateManyProofTypeInputEnvelope
-  connect?: Prisma.ProofWhereUniqueInput | Prisma.ProofWhereUniqueInput[]
-}
-
-export type ProofUpdateManyWithoutProofTypeNestedInput = {
-  create?: Prisma.XOR<Prisma.ProofCreateWithoutProofTypeInput, Prisma.ProofUncheckedCreateWithoutProofTypeInput> | Prisma.ProofCreateWithoutProofTypeInput[] | Prisma.ProofUncheckedCreateWithoutProofTypeInput[]
-  connectOrCreate?: Prisma.ProofCreateOrConnectWithoutProofTypeInput | Prisma.ProofCreateOrConnectWithoutProofTypeInput[]
-  upsert?: Prisma.ProofUpsertWithWhereUniqueWithoutProofTypeInput | Prisma.ProofUpsertWithWhereUniqueWithoutProofTypeInput[]
-  createMany?: Prisma.ProofCreateManyProofTypeInputEnvelope
-  set?: Prisma.ProofWhereUniqueInput | Prisma.ProofWhereUniqueInput[]
-  disconnect?: Prisma.ProofWhereUniqueInput | Prisma.ProofWhereUniqueInput[]
-  delete?: Prisma.ProofWhereUniqueInput | Prisma.ProofWhereUniqueInput[]
-  connect?: Prisma.ProofWhereUniqueInput | Prisma.ProofWhereUniqueInput[]
-  update?: Prisma.ProofUpdateWithWhereUniqueWithoutProofTypeInput | Prisma.ProofUpdateWithWhereUniqueWithoutProofTypeInput[]
-  updateMany?: Prisma.ProofUpdateManyWithWhereWithoutProofTypeInput | Prisma.ProofUpdateManyWithWhereWithoutProofTypeInput[]
-  deleteMany?: Prisma.ProofScalarWhereInput | Prisma.ProofScalarWhereInput[]
-}
-
-export type ProofUncheckedUpdateManyWithoutProofTypeNestedInput = {
-  create?: Prisma.XOR<Prisma.ProofCreateWithoutProofTypeInput, Prisma.ProofUncheckedCreateWithoutProofTypeInput> | Prisma.ProofCreateWithoutProofTypeInput[] | Prisma.ProofUncheckedCreateWithoutProofTypeInput[]
-  connectOrCreate?: Prisma.ProofCreateOrConnectWithoutProofTypeInput | Prisma.ProofCreateOrConnectWithoutProofTypeInput[]
-  upsert?: Prisma.ProofUpsertWithWhereUniqueWithoutProofTypeInput | Prisma.ProofUpsertWithWhereUniqueWithoutProofTypeInput[]
-  createMany?: Prisma.ProofCreateManyProofTypeInputEnvelope
-  set?: Prisma.ProofWhereUniqueInput | Prisma.ProofWhereUniqueInput[]
-  disconnect?: Prisma.ProofWhereUniqueInput | Prisma.ProofWhereUniqueInput[]
-  delete?: Prisma.ProofWhereUniqueInput | Prisma.ProofWhereUniqueInput[]
-  connect?: Prisma.ProofWhereUniqueInput | Prisma.ProofWhereUniqueInput[]
-  update?: Prisma.ProofUpdateWithWhereUniqueWithoutProofTypeInput | Prisma.ProofUpdateWithWhereUniqueWithoutProofTypeInput[]
-  updateMany?: Prisma.ProofUpdateManyWithWhereWithoutProofTypeInput | Prisma.ProofUpdateManyWithWhereWithoutProofTypeInput[]
-  deleteMany?: Prisma.ProofScalarWhereInput | Prisma.ProofScalarWhereInput[]
-}
-
 export type ProofCreateNestedOneWithoutVerificationsInput = {
   create?: Prisma.XOR<Prisma.ProofCreateWithoutVerificationsInput, Prisma.ProofUncheckedCreateWithoutVerificationsInput>
   connectOrCreate?: Prisma.ProofCreateOrConnectWithoutVerificationsInput
@@ -477,7 +411,6 @@ export type ProofCreateWithoutUserInput = {
   id?: string
   proofData: string
   task: Prisma.TaskCreateNestedOneWithoutProofsInput
-  proofType: Prisma.ProofTypeCreateNestedOneWithoutProofsInput
   verifications?: Prisma.VerificationCreateNestedManyWithoutProofInput
 }
 
@@ -485,7 +418,6 @@ export type ProofUncheckedCreateWithoutUserInput = {
   id?: string
   proofData: string
   taskId: string
-  proofTypeId: string
   verifications?: Prisma.VerificationUncheckedCreateNestedManyWithoutProofInput
 }
 
@@ -523,14 +455,12 @@ export type ProofScalarWhereInput = {
   proofData?: Prisma.StringFilter<"Proof"> | string
   taskId?: Prisma.StringFilter<"Proof"> | string
   userId?: Prisma.StringFilter<"Proof"> | string
-  proofTypeId?: Prisma.StringFilter<"Proof"> | string
 }
 
 export type ProofCreateWithoutTaskInput = {
   id?: string
   proofData: string
   user: Prisma.UserCreateNestedOneWithoutProofsInput
-  proofType: Prisma.ProofTypeCreateNestedOneWithoutProofsInput
   verifications?: Prisma.VerificationCreateNestedManyWithoutProofInput
 }
 
@@ -538,7 +468,6 @@ export type ProofUncheckedCreateWithoutTaskInput = {
   id?: string
   proofData: string
   userId: string
-  proofTypeId: string
   verifications?: Prisma.VerificationUncheckedCreateNestedManyWithoutProofInput
 }
 
@@ -568,54 +497,11 @@ export type ProofUpdateManyWithWhereWithoutTaskInput = {
   data: Prisma.XOR<Prisma.ProofUpdateManyMutationInput, Prisma.ProofUncheckedUpdateManyWithoutTaskInput>
 }
 
-export type ProofCreateWithoutProofTypeInput = {
-  id?: string
-  proofData: string
-  task: Prisma.TaskCreateNestedOneWithoutProofsInput
-  user: Prisma.UserCreateNestedOneWithoutProofsInput
-  verifications?: Prisma.VerificationCreateNestedManyWithoutProofInput
-}
-
-export type ProofUncheckedCreateWithoutProofTypeInput = {
-  id?: string
-  proofData: string
-  taskId: string
-  userId: string
-  verifications?: Prisma.VerificationUncheckedCreateNestedManyWithoutProofInput
-}
-
-export type ProofCreateOrConnectWithoutProofTypeInput = {
-  where: Prisma.ProofWhereUniqueInput
-  create: Prisma.XOR<Prisma.ProofCreateWithoutProofTypeInput, Prisma.ProofUncheckedCreateWithoutProofTypeInput>
-}
-
-export type ProofCreateManyProofTypeInputEnvelope = {
-  data: Prisma.ProofCreateManyProofTypeInput | Prisma.ProofCreateManyProofTypeInput[]
-  skipDuplicates?: boolean
-}
-
-export type ProofUpsertWithWhereUniqueWithoutProofTypeInput = {
-  where: Prisma.ProofWhereUniqueInput
-  update: Prisma.XOR<Prisma.ProofUpdateWithoutProofTypeInput, Prisma.ProofUncheckedUpdateWithoutProofTypeInput>
-  create: Prisma.XOR<Prisma.ProofCreateWithoutProofTypeInput, Prisma.ProofUncheckedCreateWithoutProofTypeInput>
-}
-
-export type ProofUpdateWithWhereUniqueWithoutProofTypeInput = {
-  where: Prisma.ProofWhereUniqueInput
-  data: Prisma.XOR<Prisma.ProofUpdateWithoutProofTypeInput, Prisma.ProofUncheckedUpdateWithoutProofTypeInput>
-}
-
-export type ProofUpdateManyWithWhereWithoutProofTypeInput = {
-  where: Prisma.ProofScalarWhereInput
-  data: Prisma.XOR<Prisma.ProofUpdateManyMutationInput, Prisma.ProofUncheckedUpdateManyWithoutProofTypeInput>
-}
-
 export type ProofCreateWithoutVerificationsInput = {
   id?: string
   proofData: string
   task: Prisma.TaskCreateNestedOneWithoutProofsInput
   user: Prisma.UserCreateNestedOneWithoutProofsInput
-  proofType: Prisma.ProofTypeCreateNestedOneWithoutProofsInput
 }
 
 export type ProofUncheckedCreateWithoutVerificationsInput = {
@@ -623,7 +509,6 @@ export type ProofUncheckedCreateWithoutVerificationsInput = {
   proofData: string
   taskId: string
   userId: string
-  proofTypeId: string
 }
 
 export type ProofCreateOrConnectWithoutVerificationsInput = {
@@ -647,7 +532,6 @@ export type ProofUpdateWithoutVerificationsInput = {
   proofData?: Prisma.StringFieldUpdateOperationsInput | string
   task?: Prisma.TaskUpdateOneRequiredWithoutProofsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutProofsNestedInput
-  proofType?: Prisma.ProofTypeUpdateOneRequiredWithoutProofsNestedInput
 }
 
 export type ProofUncheckedUpdateWithoutVerificationsInput = {
@@ -655,21 +539,18 @@ export type ProofUncheckedUpdateWithoutVerificationsInput = {
   proofData?: Prisma.StringFieldUpdateOperationsInput | string
   taskId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  proofTypeId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ProofCreateManyUserInput = {
   id?: string
   proofData: string
   taskId: string
-  proofTypeId: string
 }
 
 export type ProofUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   proofData?: Prisma.StringFieldUpdateOperationsInput | string
   task?: Prisma.TaskUpdateOneRequiredWithoutProofsNestedInput
-  proofType?: Prisma.ProofTypeUpdateOneRequiredWithoutProofsNestedInput
   verifications?: Prisma.VerificationUpdateManyWithoutProofNestedInput
 }
 
@@ -677,7 +558,6 @@ export type ProofUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   proofData?: Prisma.StringFieldUpdateOperationsInput | string
   taskId?: Prisma.StringFieldUpdateOperationsInput | string
-  proofTypeId?: Prisma.StringFieldUpdateOperationsInput | string
   verifications?: Prisma.VerificationUncheckedUpdateManyWithoutProofNestedInput
 }
 
@@ -685,21 +565,18 @@ export type ProofUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   proofData?: Prisma.StringFieldUpdateOperationsInput | string
   taskId?: Prisma.StringFieldUpdateOperationsInput | string
-  proofTypeId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ProofCreateManyTaskInput = {
   id?: string
   proofData: string
   userId: string
-  proofTypeId: string
 }
 
 export type ProofUpdateWithoutTaskInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   proofData?: Prisma.StringFieldUpdateOperationsInput | string
   user?: Prisma.UserUpdateOneRequiredWithoutProofsNestedInput
-  proofType?: Prisma.ProofTypeUpdateOneRequiredWithoutProofsNestedInput
   verifications?: Prisma.VerificationUpdateManyWithoutProofNestedInput
 }
 
@@ -707,44 +584,12 @@ export type ProofUncheckedUpdateWithoutTaskInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   proofData?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  proofTypeId?: Prisma.StringFieldUpdateOperationsInput | string
   verifications?: Prisma.VerificationUncheckedUpdateManyWithoutProofNestedInput
 }
 
 export type ProofUncheckedUpdateManyWithoutTaskInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   proofData?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
-  proofTypeId?: Prisma.StringFieldUpdateOperationsInput | string
-}
-
-export type ProofCreateManyProofTypeInput = {
-  id?: string
-  proofData: string
-  taskId: string
-  userId: string
-}
-
-export type ProofUpdateWithoutProofTypeInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  proofData?: Prisma.StringFieldUpdateOperationsInput | string
-  task?: Prisma.TaskUpdateOneRequiredWithoutProofsNestedInput
-  user?: Prisma.UserUpdateOneRequiredWithoutProofsNestedInput
-  verifications?: Prisma.VerificationUpdateManyWithoutProofNestedInput
-}
-
-export type ProofUncheckedUpdateWithoutProofTypeInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  proofData?: Prisma.StringFieldUpdateOperationsInput | string
-  taskId?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
-  verifications?: Prisma.VerificationUncheckedUpdateManyWithoutProofNestedInput
-}
-
-export type ProofUncheckedUpdateManyWithoutProofTypeInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  proofData?: Prisma.StringFieldUpdateOperationsInput | string
-  taskId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -784,10 +629,8 @@ export type ProofSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   proofData?: boolean
   taskId?: boolean
   userId?: boolean
-  proofTypeId?: boolean
   task?: boolean | Prisma.TaskDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  proofType?: boolean | Prisma.ProofTypeDefaultArgs<ExtArgs>
   verifications?: boolean | Prisma.Proof$verificationsArgs<ExtArgs>
   _count?: boolean | Prisma.ProofCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["proof"]>
@@ -797,10 +640,8 @@ export type ProofSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   proofData?: boolean
   taskId?: boolean
   userId?: boolean
-  proofTypeId?: boolean
   task?: boolean | Prisma.TaskDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  proofType?: boolean | Prisma.ProofTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["proof"]>
 
 export type ProofSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -808,10 +649,8 @@ export type ProofSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   proofData?: boolean
   taskId?: boolean
   userId?: boolean
-  proofTypeId?: boolean
   task?: boolean | Prisma.TaskDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  proofType?: boolean | Prisma.ProofTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["proof"]>
 
 export type ProofSelectScalar = {
@@ -819,26 +658,22 @@ export type ProofSelectScalar = {
   proofData?: boolean
   taskId?: boolean
   userId?: boolean
-  proofTypeId?: boolean
 }
 
-export type ProofOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "proofData" | "taskId" | "userId" | "proofTypeId", ExtArgs["result"]["proof"]>
+export type ProofOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "proofData" | "taskId" | "userId", ExtArgs["result"]["proof"]>
 export type ProofInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   task?: boolean | Prisma.TaskDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  proofType?: boolean | Prisma.ProofTypeDefaultArgs<ExtArgs>
   verifications?: boolean | Prisma.Proof$verificationsArgs<ExtArgs>
   _count?: boolean | Prisma.ProofCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProofIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   task?: boolean | Prisma.TaskDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  proofType?: boolean | Prisma.ProofTypeDefaultArgs<ExtArgs>
 }
 export type ProofIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   task?: boolean | Prisma.TaskDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  proofType?: boolean | Prisma.ProofTypeDefaultArgs<ExtArgs>
 }
 
 export type $ProofPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -846,7 +681,6 @@ export type $ProofPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   objects: {
     task: Prisma.$TaskPayload<ExtArgs>
     user: Prisma.$UserPayload<ExtArgs>
-    proofType: Prisma.$ProofTypePayload<ExtArgs>
     verifications: Prisma.$VerificationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -854,7 +688,6 @@ export type $ProofPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     proofData: string
     taskId: string
     userId: string
-    proofTypeId: string
   }, ExtArgs["result"]["proof"]>
   composites: {}
 }
@@ -1251,7 +1084,6 @@ export interface Prisma__ProofClient<T, Null = never, ExtArgs extends runtime.Ty
   readonly [Symbol.toStringTag]: "PrismaPromise"
   task<T extends Prisma.TaskDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TaskDefaultArgs<ExtArgs>>): Prisma.Prisma__TaskClient<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  proofType<T extends Prisma.ProofTypeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProofTypeDefaultArgs<ExtArgs>>): Prisma.Prisma__ProofTypeClient<runtime.Types.Result.GetResult<Prisma.$ProofTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   verifications<T extends Prisma.Proof$verificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Proof$verificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VerificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1286,7 +1118,6 @@ export interface ProofFieldRefs {
   readonly proofData: Prisma.FieldRef<"Proof", 'String'>
   readonly taskId: Prisma.FieldRef<"Proof", 'String'>
   readonly userId: Prisma.FieldRef<"Proof", 'String'>
-  readonly proofTypeId: Prisma.FieldRef<"Proof", 'String'>
 }
     
 

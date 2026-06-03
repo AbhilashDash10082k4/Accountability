@@ -61,25 +61,10 @@ export type User = Prisma.UserModel
  */
 export type Aim = Prisma.AimModel
 /**
- * Model TaskType
- * 
- */
-export type TaskType = Prisma.TaskTypeModel
-/**
  * Model Task
  * 
  */
 export type Task = Prisma.TaskModel
-/**
- * Model ProofType
- * 
- */
-export type ProofType = Prisma.ProofTypeModel
-/**
- * Model TaskTypeProofType
- * 
- */
-export type TaskTypeProofType = Prisma.TaskTypeProofTypeModel
 /**
  * Model Proof
  * 
@@ -101,10 +86,10 @@ export type TaskActivityLog = Prisma.TaskActivityLogModel
  */
 export type FocusSession = Prisma.FocusSessionModel
 /**
- * Model FocusSessionTask
+ * Model TaskSessions
  * 
  */
-export type FocusSessionTask = Prisma.FocusSessionTaskModel
+export type TaskSessions = Prisma.TaskSessionsModel
 /**
  * Model BlockedApp
  * 

@@ -53,15 +53,12 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   Aim: 'Aim',
-  TaskType: 'TaskType',
   Task: 'Task',
-  ProofType: 'ProofType',
-  TaskTypeProofType: 'TaskTypeProofType',
   Proof: 'Proof',
   Verification: 'Verification',
   TaskActivityLog: 'TaskActivityLog',
   FocusSession: 'FocusSession',
-  FocusSessionTask: 'FocusSessionTask',
+  TaskSessions: 'TaskSessions',
   BlockedApp: 'BlockedApp'
 } as const
 
@@ -103,15 +100,6 @@ export const AimScalarFieldEnum = {
 export type AimScalarFieldEnum = (typeof AimScalarFieldEnum)[keyof typeof AimScalarFieldEnum]
 
 
-export const TaskTypeScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  description: 'description'
-} as const
-
-export type TaskTypeScalarFieldEnum = (typeof TaskTypeScalarFieldEnum)[keyof typeof TaskTypeScalarFieldEnum]
-
-
 export const TaskScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -122,37 +110,17 @@ export const TaskScalarFieldEnum = {
   endTime: 'endTime',
   is_completed: 'is_completed',
   userId: 'userId',
-  taskTypeId: 'taskTypeId',
   aimId: 'aimId'
 } as const
 
 export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof TaskScalarFieldEnum]
 
 
-export const ProofTypeScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  description: 'description'
-} as const
-
-export type ProofTypeScalarFieldEnum = (typeof ProofTypeScalarFieldEnum)[keyof typeof ProofTypeScalarFieldEnum]
-
-
-export const TaskTypeProofTypeScalarFieldEnum = {
-  id: 'id',
-  taskTypeId: 'taskTypeId',
-  proofTypeId: 'proofTypeId'
-} as const
-
-export type TaskTypeProofTypeScalarFieldEnum = (typeof TaskTypeProofTypeScalarFieldEnum)[keyof typeof TaskTypeProofTypeScalarFieldEnum]
-
-
 export const ProofScalarFieldEnum = {
   id: 'id',
   proofData: 'proofData',
   taskId: 'taskId',
-  userId: 'userId',
-  proofTypeId: 'proofTypeId'
+  userId: 'userId'
 } as const
 
 export type ProofScalarFieldEnum = (typeof ProofScalarFieldEnum)[keyof typeof ProofScalarFieldEnum]
@@ -197,14 +165,14 @@ export const FocusSessionScalarFieldEnum = {
 export type FocusSessionScalarFieldEnum = (typeof FocusSessionScalarFieldEnum)[keyof typeof FocusSessionScalarFieldEnum]
 
 
-export const FocusSessionTaskScalarFieldEnum = {
+export const TaskSessionsScalarFieldEnum = {
   id: 'id',
   focusSessionId: 'focusSessionId',
   taskId: 'taskId',
   assignedAt: 'assignedAt'
 } as const
 
-export type FocusSessionTaskScalarFieldEnum = (typeof FocusSessionTaskScalarFieldEnum)[keyof typeof FocusSessionTaskScalarFieldEnum]
+export type TaskSessionsScalarFieldEnum = (typeof TaskSessionsScalarFieldEnum)[keyof typeof TaskSessionsScalarFieldEnum]
 
 
 export const BlockedAppScalarFieldEnum = {

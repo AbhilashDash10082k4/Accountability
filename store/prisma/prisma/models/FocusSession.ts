@@ -207,7 +207,7 @@ export type FocusSessionWhereInput = {
   userId?: Prisma.StringFilter<"FocusSession"> | string
   taskId?: Prisma.StringFilter<"FocusSession"> | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  tasks?: Prisma.FocusSessionTaskListRelationFilter
+  tasks?: Prisma.TaskSessionsListRelationFilter
   blockedApps?: Prisma.BlockedAppListRelationFilter
   task?: Prisma.XOR<Prisma.TaskScalarRelationFilter, Prisma.TaskWhereInput>
 }
@@ -222,7 +222,7 @@ export type FocusSessionOrderByWithRelationInput = {
   userId?: Prisma.SortOrder
   taskId?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
-  tasks?: Prisma.FocusSessionTaskOrderByRelationAggregateInput
+  tasks?: Prisma.TaskSessionsOrderByRelationAggregateInput
   blockedApps?: Prisma.BlockedAppOrderByRelationAggregateInput
   task?: Prisma.TaskOrderByWithRelationInput
 }
@@ -240,7 +240,7 @@ export type FocusSessionWhereUniqueInput = Prisma.AtLeast<{
   userId?: Prisma.StringFilter<"FocusSession"> | string
   taskId?: Prisma.StringFilter<"FocusSession"> | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  tasks?: Prisma.FocusSessionTaskListRelationFilter
+  tasks?: Prisma.TaskSessionsListRelationFilter
   blockedApps?: Prisma.BlockedAppListRelationFilter
   task?: Prisma.XOR<Prisma.TaskScalarRelationFilter, Prisma.TaskWhereInput>
 }, "id">
@@ -281,7 +281,7 @@ export type FocusSessionCreateInput = {
   status: $Enums.FocusSessionStatus
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutFocusSessionsInput
-  tasks?: Prisma.FocusSessionTaskCreateNestedManyWithoutFocusSessionInput
+  tasks?: Prisma.TaskSessionsCreateNestedManyWithoutFocusSessionInput
   blockedApps?: Prisma.BlockedAppCreateNestedManyWithoutFocusSessionInput
   task: Prisma.TaskCreateNestedOneWithoutFocusSessionsInput
 }
@@ -295,7 +295,7 @@ export type FocusSessionUncheckedCreateInput = {
   createdAt?: Date | string
   userId: string
   taskId: string
-  tasks?: Prisma.FocusSessionTaskUncheckedCreateNestedManyWithoutFocusSessionInput
+  tasks?: Prisma.TaskSessionsUncheckedCreateNestedManyWithoutFocusSessionInput
   blockedApps?: Prisma.BlockedAppUncheckedCreateNestedManyWithoutFocusSessionInput
 }
 
@@ -307,7 +307,7 @@ export type FocusSessionUpdateInput = {
   status?: Prisma.EnumFocusSessionStatusFieldUpdateOperationsInput | $Enums.FocusSessionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutFocusSessionsNestedInput
-  tasks?: Prisma.FocusSessionTaskUpdateManyWithoutFocusSessionNestedInput
+  tasks?: Prisma.TaskSessionsUpdateManyWithoutFocusSessionNestedInput
   blockedApps?: Prisma.BlockedAppUpdateManyWithoutFocusSessionNestedInput
   task?: Prisma.TaskUpdateOneRequiredWithoutFocusSessionsNestedInput
 }
@@ -321,7 +321,7 @@ export type FocusSessionUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   taskId?: Prisma.StringFieldUpdateOperationsInput | string
-  tasks?: Prisma.FocusSessionTaskUncheckedUpdateManyWithoutFocusSessionNestedInput
+  tasks?: Prisma.TaskSessionsUncheckedUpdateManyWithoutFocusSessionNestedInput
   blockedApps?: Prisma.BlockedAppUncheckedUpdateManyWithoutFocusSessionNestedInput
 }
 
@@ -527,7 +527,7 @@ export type FocusSessionCreateWithoutUserInput = {
   endTime?: Date | string | null
   status: $Enums.FocusSessionStatus
   createdAt?: Date | string
-  tasks?: Prisma.FocusSessionTaskCreateNestedManyWithoutFocusSessionInput
+  tasks?: Prisma.TaskSessionsCreateNestedManyWithoutFocusSessionInput
   blockedApps?: Prisma.BlockedAppCreateNestedManyWithoutFocusSessionInput
   task: Prisma.TaskCreateNestedOneWithoutFocusSessionsInput
 }
@@ -540,7 +540,7 @@ export type FocusSessionUncheckedCreateWithoutUserInput = {
   status: $Enums.FocusSessionStatus
   createdAt?: Date | string
   taskId: string
-  tasks?: Prisma.FocusSessionTaskUncheckedCreateNestedManyWithoutFocusSessionInput
+  tasks?: Prisma.TaskSessionsUncheckedCreateNestedManyWithoutFocusSessionInput
   blockedApps?: Prisma.BlockedAppUncheckedCreateNestedManyWithoutFocusSessionInput
 }
 
@@ -592,7 +592,7 @@ export type FocusSessionCreateWithoutTaskInput = {
   status: $Enums.FocusSessionStatus
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutFocusSessionsInput
-  tasks?: Prisma.FocusSessionTaskCreateNestedManyWithoutFocusSessionInput
+  tasks?: Prisma.TaskSessionsCreateNestedManyWithoutFocusSessionInput
   blockedApps?: Prisma.BlockedAppCreateNestedManyWithoutFocusSessionInput
 }
 
@@ -604,7 +604,7 @@ export type FocusSessionUncheckedCreateWithoutTaskInput = {
   status: $Enums.FocusSessionStatus
   createdAt?: Date | string
   userId: string
-  tasks?: Prisma.FocusSessionTaskUncheckedCreateNestedManyWithoutFocusSessionInput
+  tasks?: Prisma.TaskSessionsUncheckedCreateNestedManyWithoutFocusSessionInput
   blockedApps?: Prisma.BlockedAppUncheckedCreateNestedManyWithoutFocusSessionInput
 }
 
@@ -706,7 +706,7 @@ export type FocusSessionCreateWithoutBlockedAppsInput = {
   status: $Enums.FocusSessionStatus
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutFocusSessionsInput
-  tasks?: Prisma.FocusSessionTaskCreateNestedManyWithoutFocusSessionInput
+  tasks?: Prisma.TaskSessionsCreateNestedManyWithoutFocusSessionInput
   task: Prisma.TaskCreateNestedOneWithoutFocusSessionsInput
 }
 
@@ -719,7 +719,7 @@ export type FocusSessionUncheckedCreateWithoutBlockedAppsInput = {
   createdAt?: Date | string
   userId: string
   taskId: string
-  tasks?: Prisma.FocusSessionTaskUncheckedCreateNestedManyWithoutFocusSessionInput
+  tasks?: Prisma.TaskSessionsUncheckedCreateNestedManyWithoutFocusSessionInput
 }
 
 export type FocusSessionCreateOrConnectWithoutBlockedAppsInput = {
@@ -746,7 +746,7 @@ export type FocusSessionUpdateWithoutBlockedAppsInput = {
   status?: Prisma.EnumFocusSessionStatusFieldUpdateOperationsInput | $Enums.FocusSessionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutFocusSessionsNestedInput
-  tasks?: Prisma.FocusSessionTaskUpdateManyWithoutFocusSessionNestedInput
+  tasks?: Prisma.TaskSessionsUpdateManyWithoutFocusSessionNestedInput
   task?: Prisma.TaskUpdateOneRequiredWithoutFocusSessionsNestedInput
 }
 
@@ -759,7 +759,7 @@ export type FocusSessionUncheckedUpdateWithoutBlockedAppsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   taskId?: Prisma.StringFieldUpdateOperationsInput | string
-  tasks?: Prisma.FocusSessionTaskUncheckedUpdateManyWithoutFocusSessionNestedInput
+  tasks?: Prisma.TaskSessionsUncheckedUpdateManyWithoutFocusSessionNestedInput
 }
 
 export type FocusSessionCreateManyUserInput = {
@@ -779,7 +779,7 @@ export type FocusSessionUpdateWithoutUserInput = {
   endTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumFocusSessionStatusFieldUpdateOperationsInput | $Enums.FocusSessionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  tasks?: Prisma.FocusSessionTaskUpdateManyWithoutFocusSessionNestedInput
+  tasks?: Prisma.TaskSessionsUpdateManyWithoutFocusSessionNestedInput
   blockedApps?: Prisma.BlockedAppUpdateManyWithoutFocusSessionNestedInput
   task?: Prisma.TaskUpdateOneRequiredWithoutFocusSessionsNestedInput
 }
@@ -792,7 +792,7 @@ export type FocusSessionUncheckedUpdateWithoutUserInput = {
   status?: Prisma.EnumFocusSessionStatusFieldUpdateOperationsInput | $Enums.FocusSessionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   taskId?: Prisma.StringFieldUpdateOperationsInput | string
-  tasks?: Prisma.FocusSessionTaskUncheckedUpdateManyWithoutFocusSessionNestedInput
+  tasks?: Prisma.TaskSessionsUncheckedUpdateManyWithoutFocusSessionNestedInput
   blockedApps?: Prisma.BlockedAppUncheckedUpdateManyWithoutFocusSessionNestedInput
 }
 
@@ -824,7 +824,7 @@ export type FocusSessionUpdateWithoutTaskInput = {
   status?: Prisma.EnumFocusSessionStatusFieldUpdateOperationsInput | $Enums.FocusSessionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutFocusSessionsNestedInput
-  tasks?: Prisma.FocusSessionTaskUpdateManyWithoutFocusSessionNestedInput
+  tasks?: Prisma.TaskSessionsUpdateManyWithoutFocusSessionNestedInput
   blockedApps?: Prisma.BlockedAppUpdateManyWithoutFocusSessionNestedInput
 }
 
@@ -836,7 +836,7 @@ export type FocusSessionUncheckedUpdateWithoutTaskInput = {
   status?: Prisma.EnumFocusSessionStatusFieldUpdateOperationsInput | $Enums.FocusSessionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  tasks?: Prisma.FocusSessionTaskUncheckedUpdateManyWithoutFocusSessionNestedInput
+  tasks?: Prisma.TaskSessionsUncheckedUpdateManyWithoutFocusSessionNestedInput
   blockedApps?: Prisma.BlockedAppUncheckedUpdateManyWithoutFocusSessionNestedInput
 }
 
@@ -879,7 +879,7 @@ export type FocusSessionCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types
  * FocusSessionCountOutputType without action
  */
 export type FocusSessionCountOutputTypeCountTasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.FocusSessionTaskWhereInput
+  where?: Prisma.TaskSessionsWhereInput
 }
 
 /**
@@ -964,7 +964,7 @@ export type $FocusSessionPayload<ExtArgs extends runtime.Types.Extensions.Intern
   name: "FocusSession"
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
-    tasks: Prisma.$FocusSessionTaskPayload<ExtArgs>[]
+    tasks: Prisma.$TaskSessionsPayload<ExtArgs>[]
     blockedApps: Prisma.$BlockedAppPayload<ExtArgs>[]
     task: Prisma.$TaskPayload<ExtArgs>
   }
@@ -1372,7 +1372,7 @@ readonly fields: FocusSessionFieldRefs;
 export interface Prisma__FocusSessionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  tasks<T extends Prisma.FocusSession$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FocusSession$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FocusSessionTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tasks<T extends Prisma.FocusSession$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FocusSession$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskSessionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   blockedApps<T extends Prisma.FocusSession$blockedAppsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FocusSession$blockedAppsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BlockedAppPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   task<T extends Prisma.TaskDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TaskDefaultArgs<ExtArgs>>): Prisma.Prisma__TaskClient<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
@@ -1817,23 +1817,23 @@ export type FocusSessionDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.
  */
 export type FocusSession$tasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the FocusSessionTask
+   * Select specific fields to fetch from the TaskSessions
    */
-  select?: Prisma.FocusSessionTaskSelect<ExtArgs> | null
+  select?: Prisma.TaskSessionsSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the FocusSessionTask
+   * Omit specific fields from the TaskSessions
    */
-  omit?: Prisma.FocusSessionTaskOmit<ExtArgs> | null
+  omit?: Prisma.TaskSessionsOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.FocusSessionTaskInclude<ExtArgs> | null
-  where?: Prisma.FocusSessionTaskWhereInput
-  orderBy?: Prisma.FocusSessionTaskOrderByWithRelationInput | Prisma.FocusSessionTaskOrderByWithRelationInput[]
-  cursor?: Prisma.FocusSessionTaskWhereUniqueInput
+  include?: Prisma.TaskSessionsInclude<ExtArgs> | null
+  where?: Prisma.TaskSessionsWhereInput
+  orderBy?: Prisma.TaskSessionsOrderByWithRelationInput | Prisma.TaskSessionsOrderByWithRelationInput[]
+  cursor?: Prisma.TaskSessionsWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.FocusSessionTaskScalarFieldEnum | Prisma.FocusSessionTaskScalarFieldEnum[]
+  distinct?: Prisma.TaskSessionsScalarFieldEnum | Prisma.TaskSessionsScalarFieldEnum[]
 }
 
 /**
