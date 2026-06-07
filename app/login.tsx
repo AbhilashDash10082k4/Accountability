@@ -1,6 +1,6 @@
 import { Link, Stack } from "expo-router";
 import { StyleSheet } from "react-native";
-
+import GoogleSignInButton from "@/components/social-auth-buttons/google-sign-in-button";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 
@@ -11,6 +11,7 @@ export default function LoginScreen() {
       <ThemedView style={styles.container}>
         <ThemedText type="title">Login</ThemedText>
         <Link href="/" style={styles.link}>
+          <GoogleSignInButton />
           <ThemedText type="link">Try to navigate to home screen!</ThemedText>
         </Link>
       </ThemedView>
