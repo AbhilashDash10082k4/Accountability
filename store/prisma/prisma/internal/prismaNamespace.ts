@@ -1147,7 +1147,7 @@ export const TaskScalarFieldEnum = {
   durationMins: 'durationMins',
   startTime: 'startTime',
   endTime: 'endTime',
-  is_completed: 'is_completed',
+  status: 'status',
   userId: 'userId',
   aimId: 'aimId'
 } as const
@@ -1328,9 +1328,16 @@ export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
 
 
 /**
- * Reference to a field of type 'Boolean'
+ * Reference to a field of type 'TaskStatus'
  */
-export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+export type EnumTaskStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TaskStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'TaskStatus[]'
+ */
+export type ListEnumTaskStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TaskStatus[]'>
     
 
 

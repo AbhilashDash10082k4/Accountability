@@ -3,7 +3,7 @@ import { View, Text, Pressable } from "react-native";
 import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { CalendarHeaderProps } from "@/utils/interfaces";
+import { CalendarHeaderProps } from "@/lib/utils/interfaces";
 
 export default function CalendarHeader({
   currentMonthName,
@@ -78,10 +78,7 @@ export default function CalendarHeader({
 
       {/* Right actions */}
       <View className="flex-row items-center gap-3">
-        <Pressable
-          hitSlop={8}
-          className="p-2 rounded-full active:bg-white/10"
-        >
+        <Pressable hitSlop={8} className="p-2 rounded-full active:bg-white/10">
           <Ionicons name="search" size={20} color="#c6c6cb" />
         </Pressable>
 

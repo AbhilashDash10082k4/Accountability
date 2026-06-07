@@ -1,4 +1,4 @@
-import { TimelineEvent } from "../utils/interfaces";
+import { TimelineEvent } from "../lib/utils/interfaces";
 
 export const mockEvents: TimelineEvent[] = [
   // May 25 Events

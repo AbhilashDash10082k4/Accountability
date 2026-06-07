@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { View, Text, ScrollView, PanResponder, Pressable } from "react-native";
 import DraggableEvent from "./DraggableEvent";
 import AddEventBottomSheet from "./AddEventBottomSheet";
-import { HourlyViewProps, TimelineEvent } from "@/utils/interfaces";
+import { HourlyViewProps, TimelineEvent } from "@/lib/utils/interfaces";
 
 export default function HourlyView({
   selectedDate,
@@ -143,7 +143,7 @@ export default function HourlyView({
       onPanResponderRelease: () => {
         setScrollEnabled(true);
       },
-    })
+    }),
   ).current;
 
   const bottomPanResponder = useRef(
@@ -165,7 +165,7 @@ export default function HourlyView({
       onPanResponderRelease: () => {
         setScrollEnabled(true);
       },
-    })
+    }),
   ).current;
 
   const bodyPanResponder = useRef(
@@ -175,7 +175,8 @@ export default function HourlyView({
       onPanResponderGrant: () => {
         setScrollEnabled(false);
         dragStartRef.current = draftStartRef.current ?? 0;
-        dragTimeRef.current = (draftEndRef.current ?? 2) - (draftStartRef.current ?? 0);
+        dragTimeRef.current =
+          (draftEndRef.current ?? 2) - (draftStartRef.current ?? 0);
       },
       onPanResponderMove: (evt, gestureState) => {
         const deltaHours = gestureState.dy / hourHeight;
@@ -189,7 +190,7 @@ export default function HourlyView({
       onPanResponderRelease: () => {
         setScrollEnabled(true);
       },
-    })
+    }),
   ).current;
 
   const handleRowPress = (h: number) => {
@@ -210,7 +211,12 @@ export default function HourlyView({
     setShowBottomSheet(false);
   };
 
-  const handleSave = (title: string, description: string, startTime: string, endTime: string) => {
+  const handleSave = (
+    title: string,
+    description: string,
+    startTime: string,
+    endTime: string,
+  ) => {
     const formatToTimeKey = (timeStr: string) => {
       const parts = timeStr.trim().split(" ");
       const [hStr, mStr] = parts[0].split(":");

@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Animated, PanResponder, Text, View, Pressable } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { DraggableEventProps, TimelineEvent } from "@/utils/interfaces";
+import { DraggableEventProps, TimelineEvent } from "@/lib/utils/interfaces";
 
 export default function DraggableEvent({
   event,
@@ -26,7 +26,11 @@ export default function DraggableEvent({
   const initialTop = initialHour * hourHeight;
 
   // Determine height based on event length (supporting dynamic duration)
-  const eventDurationHours = event.duration ? parseFloat(event.duration) : (event.title === "Dinner, chess" ? 2 : 1);
+  const eventDurationHours = event.duration
+    ? parseFloat(event.duration)
+    : event.title === "Dinner, chess"
+      ? 2
+      : 1;
   const cardHeight = eventDurationHours * hourHeight - 8; // Small margin top/bottom
 
   // Animation values
@@ -178,7 +182,9 @@ export default function DraggableEvent({
           event.type === "task" ? "border-[#00201c]/10" : "border-white/5"
         }`}
       >
-        <Text className={`text-[10px] font-semibold font-geist ${descColorClass}`}>
+        <Text
+          className={`text-[10px] font-semibold font-geist ${descColorClass}`}
+        >
           {event.time} ({eventDurationHours} hr
           {eventDurationHours > 1 ? "s" : ""})
         </Text>

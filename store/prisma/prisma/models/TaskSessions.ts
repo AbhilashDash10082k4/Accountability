@@ -224,7 +224,7 @@ export type TaskSessionsCreateInput = {
   id?: string
   assignedAt?: Date | string
   focusSession: Prisma.FocusSessionCreateNestedOneWithoutTasksInput
-  task: Prisma.TaskCreateNestedOneWithoutTaskSessionssInput
+  task: Prisma.TaskCreateNestedOneWithoutTaskSessionsInput
 }
 
 export type TaskSessionsUncheckedCreateInput = {
@@ -238,7 +238,7 @@ export type TaskSessionsUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   focusSession?: Prisma.FocusSessionUpdateOneRequiredWithoutTasksNestedInput
-  task?: Prisma.TaskUpdateOneRequiredWithoutTaskSessionssNestedInput
+  task?: Prisma.TaskUpdateOneRequiredWithoutTaskSessionsNestedInput
 }
 
 export type TaskSessionsUncheckedUpdateInput = {
@@ -438,7 +438,7 @@ export type TaskSessionsScalarWhereInput = {
 export type TaskSessionsCreateWithoutFocusSessionInput = {
   id?: string
   assignedAt?: Date | string
-  task: Prisma.TaskCreateNestedOneWithoutTaskSessionssInput
+  task: Prisma.TaskCreateNestedOneWithoutTaskSessionsInput
 }
 
 export type TaskSessionsUncheckedCreateWithoutFocusSessionInput = {
@@ -506,7 +506,7 @@ export type TaskSessionsCreateManyFocusSessionInput = {
 export type TaskSessionsUpdateWithoutFocusSessionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   assignedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  task?: Prisma.TaskUpdateOneRequiredWithoutTaskSessionssNestedInput
+  task?: Prisma.TaskUpdateOneRequiredWithoutTaskSessionsNestedInput
 }
 
 export type TaskSessionsUncheckedUpdateWithoutFocusSessionInput = {

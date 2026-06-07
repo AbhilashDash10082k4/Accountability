@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, Pressable, ScrollView } from "react-native";
-import { MonthViewProps, TimelineEvent } from "@/utils/interfaces";
+import { MonthViewProps, TimelineEvent } from "@/lib/utils/interfaces";
 
 export default function MonthView({
   currentDate,
@@ -157,7 +157,10 @@ export default function MonthView({
                   let textColor = "text-sky-300";
                   let borderColor = "border-sky-500/30";
 
-                  if (evt.title?.startsWith("Due:") || evt.type === "deadline") {
+                  if (
+                    evt.title?.startsWith("Due:") ||
+                    evt.type === "deadline"
+                  ) {
                     bgColor = "bg-rose-500/20";
                     textColor = "text-rose-300";
                     borderColor = "border-rose-500/30";

@@ -1,3 +1,10 @@
+/*Function of this component-
+-show calendar UI with months and days
+-every day should be pressable button opening a different view
+-every day should be divided into hours with a task setter
+-task setter should be variable and upon setting the tasks the popup should be visible
+-should be able to navigate back and forth the months
+-should save tasks in the calendar/DB and show them in the tasks tab*/
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
 import * as ExpoCalendar from "expo-calendar";
@@ -6,7 +13,7 @@ import { useCallback, useEffect, useState } from "react";
 import { BackHandler, Pressable, Text, View } from "react-native";
 
 import { mockEvents, monthNames } from "@/constants/mockEvents";
-import { TimelineEvent } from "@/utils/interfaces";
+import { TimelineEvent } from "@/lib/utils/interfaces";
 import CalendarHeader from "./CalendarHeader";
 import HourlyView from "./HourlyView";
 import MonthView from "./MonthView";
@@ -16,58 +23,56 @@ export default function GoogleCalendarComponent() {
   const [viewMode, setViewMode] = useState<"month" | "day">("month");
 
   // Set default initial date to present day
-  const [currentDate, setCurrentDate] = useState<Date>(() => {
-    const d = new Date();
-    d.setHours(0, 0, 0, 0);
-    return d;
-  });
-  const [selectedDate, setSelectedDate] = useState<Date>(() => {
-    const d = new Date();
-    d.setHours(0, 0, 0, 0);
-    return d;
-  });
+  const today = new Date();
+  const [currentDate, setCurrentDate] = useState<Date>(
+    new Date(today.getFullYear(), today.getMonth(), 1),
+  );
+  const [selectedDate, setSelectedDate] = useState<Date>(today);
 
   const handlePrevMonth = useCallback(() => {
     setCurrentDate((prev) => {
-      if (!prev || !(prev instanceof Date) || isNaN(prev.getTime())) {
-        return new Date();
-      }
-      const copy = new Date(prev);
-      copy.setMonth(prev.getMonth() - 1);
-      return copy;
+      console.log("\nPREV:", prev.toString());
+      const prevv = new Date(prev.getFullYear(), prev.getMonth() - 1, 1);
+      console.log("\nNEXT:", prevv.toString());
+      return prevv;
     });
   }, []);
 
   const handleNextMonth = useCallback(() => {
     setCurrentDate((prev) => {
-      if (!prev || !(prev instanceof Date) || isNaN(prev.getTime())) {
-        return new Date();
-      }
-      const copy = new Date(prev);
-      copy.setMonth(prev.getMonth() + 1);
-      return copy;
+      return new Date(prev.getFullYear(), prev.getMonth() + 1, 1);
     });
   }, []);
-
   useEffect(() => {
-    const onBackPress = () => {
-      if (viewMode === "day") {
-        setViewMode("month");
-        setCurrentDate(selectedDate);
-        return true;
-      }
-      if (viewMode === "month") {
-        handlePrevMonth();
-        return true;
-      }
-      return false;
-    };
-    const subscription = BackHandler.addEventListener(
-      "hardwareBackPress",
-      onBackPress,
+    console.log(
+      "\nVIEW:",
+      viewMode,
+      "\nCURRENT:",
+      currentDate.toString(),
+      "\nSELECTED:",
+      selectedDate.toString(),
     );
-    return () => subscription.remove();
-  }, [viewMode, handlePrevMonth, selectedDate]);
+  }, [viewMode, currentDate, selectedDate]);
+  // useEffect(() => {
+  //   const onBackPress = () => {
+  //     if (viewMode === "day") {
+  //       setViewMode("month");
+  //       setCurrentDate(
+  //         new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1),
+  //       );
+  //       return true;
+  //     }
+  //     if (viewMode === "month") {
+  //       return false;
+  //     }
+  //     return false;
+  //   };
+  //   const subscription = BackHandler.addEventListener(
+  //     "hardwareBackPress",
+  //     onBackPress,
+  //   );
+  //   return () => subscription.remove();
+  // }, [viewMode, handlePrevMonth, selectedDate]);
 
   const [events, setEvents] = useState<TimelineEvent[]>(mockEvents);
 
@@ -125,7 +130,6 @@ export default function GoogleCalendarComponent() {
 
   const handleDaySelect = (date: Date) => {
     setSelectedDate(date);
-    setCurrentDate(date);
     setViewMode("day");
   };
 
@@ -172,11 +176,9 @@ export default function GoogleCalendarComponent() {
 
       {/* Main Mode Toggle Switch */}
       {viewMode === "month" ? (
-        <MonthView
-          currentDate={currentDate}
-          events={events}
-          onDaySelect={handleDaySelect}
-        />
+        <View>
+          <Text>Month View Test</Text>
+        </View>
       ) : (
         <HourlyView
           selectedDate={selectedDate}

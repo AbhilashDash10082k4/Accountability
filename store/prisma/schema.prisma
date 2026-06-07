@@ -53,16 +53,15 @@ model Task {
   durationMins  Int
   startTime     DateTime
   endTime       DateTime?
-  is_completed  Boolean           @default(false)
+  status        TaskStatus        @default(PENDING)
   userId        String
   user          User              @relation(fields: [userId], references: [id])
   aimId         String?
   aim           Aim?              @relation(fields: [aimId], references: [id])
   proofs        Proof[]
   verifications Verification[]
-  focusSessions FocusSession[]
   activityLogs  TaskActivityLog[]
-  TaskSessionss TaskSessions[]
+  taskSessions  TaskSessions[]
 }
 
 model Proof {
@@ -108,10 +107,10 @@ model FocusSession {
   user        User               @relation(fields: [userId], references: [id])
   tasks       TaskSessions[]
   blockedApps BlockedApp[]
-  task        Task               @relation(fields: [taskId], references: [id])
   taskId      String
 }
 
+//explicit many-many relations
 model TaskSessions {
   id             String       @id @default(uuid())
   focusSessionId String
