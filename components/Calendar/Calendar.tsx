@@ -13,7 +13,7 @@ import { useCallback, useEffect, useState } from "react";
 import { BackHandler, Pressable, Text, View } from "react-native";
 
 import { mockEvents, monthNames } from "@/constants/mockEvents";
-import { TimelineEvent } from "@/lib/utils/interfaces";
+import { TimelineEvent } from "@/lib/interfaces";
 import CalendarHeader from "./CalendarHeader";
 import HourlyView from "./HourlyView";
 import MonthView from "./MonthView";

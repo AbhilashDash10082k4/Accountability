@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { View, Text, ScrollView, PanResponder, Pressable } from "react-native";
 import DraggableEvent from "./DraggableEvent";
 import AddEventBottomSheet from "./AddEventBottomSheet";
-import { HourlyViewProps, TimelineEvent } from "@/lib/utils/interfaces";
+import { HourlyViewProps, TimelineEvent } from "@/lib/interfaces";
 
 export default function HourlyView({
   selectedDate,

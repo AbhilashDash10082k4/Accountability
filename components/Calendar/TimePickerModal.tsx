@@ -62,7 +62,8 @@ export default function TimePickerModal({
   };
 
   // Selected angle for center hand pointer
-  const activeValue = activeField === "hour" ? selectedHour % 12 : selectedMinute / 5;
+  const activeValue =
+    activeField === "hour" ? selectedHour % 12 : selectedMinute / 5;
   const angle = (activeValue * 30 - 90) * (Math.PI / 180);
   const sx = cx + radius * Math.cos(angle);
   const sy = cy + radius * Math.sin(angle);
@@ -90,9 +91,11 @@ export default function TimePickerModal({
               {/* Hour Box */}
               <Pressable
                 onPress={() => setActiveField("hour")}
-                delayPressIn={0}
+                delayLongPress={0}
                 className={`w-16 h-16 rounded-xl justify-center items-center ${
-                  activeField === "hour" ? "bg-amber-500/20 border-2 border-amber-500" : "bg-white/5"
+                  activeField === "hour"
+                    ? "bg-amber-500/20 border-2 border-amber-500"
+                    : "bg-white/5"
                 }`}
               >
                 <Text className="text-3xl font-bold text-on-surface">
@@ -105,9 +108,11 @@ export default function TimePickerModal({
               {/* Minute Box */}
               <Pressable
                 onPress={() => setActiveField("minute")}
-                delayPressIn={0}
+                delayLongPress={0}
                 className={`w-16 h-16 rounded-xl justify-center items-center ${
-                  activeField === "minute" ? "bg-amber-500/20 border-2 border-amber-500" : "bg-white/5"
+                  activeField === "minute"
+                    ? "bg-amber-500/20 border-2 border-amber-500"
+                    : "bg-white/5"
                 }`}
               >
                 <Text className="text-3xl font-bold text-on-surface">
@@ -120,24 +125,28 @@ export default function TimePickerModal({
             <View className="border border-white/10 rounded-xl overflow-hidden">
               <Pressable
                 onPress={() => setPeriod("AM")}
-                delayPressIn={0}
+                delayLongPress={0}
                 className={`px-3 py-2 items-center justify-center ${
                   period === "AM" ? "bg-amber-500/20" : "bg-transparent"
                 }`}
               >
-                <Text className={`text-xs font-bold ${period === "AM" ? "text-amber-400" : "text-on-surface-variant/60"}`}>
+                <Text
+                  className={`text-xs font-bold ${period === "AM" ? "text-amber-400" : "text-on-surface-variant/60"}`}
+                >
                   AM
                 </Text>
               </Pressable>
               <View className="h-[1px] bg-white/10" />
               <Pressable
                 onPress={() => setPeriod("PM")}
-                delayPressIn={0}
+                delayLongPress={0}
                 className={`px-3 py-2 items-center justify-center ${
                   period === "PM" ? "bg-amber-500/20" : "bg-transparent"
                 }`}
               >
-                <Text className={`text-xs font-bold ${period === "PM" ? "text-amber-400" : "text-on-surface-variant/60"}`}>
+                <Text
+                  className={`text-xs font-bold ${period === "PM" ? "text-amber-400" : "text-on-surface-variant/60"}`}
+                >
                   PM
                 </Text>
               </Pressable>
@@ -156,7 +165,11 @@ export default function TimePickerModal({
                   width: 2,
                   height: radius,
                   backgroundColor: "#e0a96d",
-                  transform: [{ rotate: `${activeField === "hour" ? selectedHour * 30 : selectedMinute * 6}deg` }],
+                  transform: [
+                    {
+                      rotate: `${activeField === "hour" ? selectedHour * 30 : selectedMinute * 6}deg`,
+                    },
+                  ],
                 }}
               />
 
@@ -189,7 +202,7 @@ export default function TimePickerModal({
                       <Pressable
                         key={h}
                         onPress={() => handleDialSelect(h)}
-                        delayPressIn={0}
+                        delayLongPress={0}
                         style={{
                           position: "absolute",
                           left: hx - 15,
@@ -200,7 +213,9 @@ export default function TimePickerModal({
                           justifyContent: "center",
                         }}
                       >
-                        <Text className={`text-xs font-semibold ${isSelected ? "text-amber-400 font-bold" : "text-on-surface"}`}>
+                        <Text
+                          className={`text-xs font-semibold ${isSelected ? "text-amber-400 font-bold" : "text-on-surface"}`}
+                        >
                           {h}
                         </Text>
                       </Pressable>
@@ -215,7 +230,7 @@ export default function TimePickerModal({
                       <Pressable
                         key={m}
                         onPress={() => handleDialSelect(m)}
-                        delayPressIn={0}
+                        delayLongPress={0}
                         style={{
                           position: "absolute",
                           left: mx - 15,
@@ -226,7 +241,9 @@ export default function TimePickerModal({
                           justifyContent: "center",
                         }}
                       >
-                        <Text className={`text-xs font-semibold ${isSelected ? "text-amber-400 font-bold" : "text-on-surface"}`}>
+                        <Text
+                          className={`text-xs font-semibold ${isSelected ? "text-amber-400 font-bold" : "text-on-surface"}`}
+                        >
                           {String(m).padStart(2, "0")}
                         </Text>
                       </Pressable>
@@ -248,9 +265,7 @@ export default function TimePickerModal({
                 </Text>
               </Pressable>
               <Pressable onPress={handleOK} hitSlop={8} className="px-3 py-2">
-                <Text className="text-sm font-bold text-amber-400">
-                  OK
-                </Text>
+                <Text className="text-sm font-bold text-amber-400">OK</Text>
               </Pressable>
             </View>
           </View>

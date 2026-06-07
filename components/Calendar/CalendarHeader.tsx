@@ -3,7 +3,7 @@ import { View, Text, Pressable } from "react-native";
 import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { CalendarHeaderProps } from "@/lib/utils/interfaces";
+import { CalendarHeaderProps } from "@/lib/interfaces";
 
 export default function CalendarHeader({
   currentMonthName,

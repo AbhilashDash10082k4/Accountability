@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Animated, PanResponder, Text, View, Pressable } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { DraggableEventProps, TimelineEvent } from "@/lib/utils/interfaces";
+import { DraggableEventProps, TimelineEvent } from "@/lib/interfaces";
 
 export default function DraggableEvent({
   event,

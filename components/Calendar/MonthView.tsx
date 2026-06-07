@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, Pressable, ScrollView } from "react-native";
-import { MonthViewProps, TimelineEvent } from "@/lib/utils/interfaces";
+import { MonthViewProps, TimelineEvent } from "@/lib/interfaces";
 
 export default function MonthView({
   currentDate,
