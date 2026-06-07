@@ -5,6 +5,7 @@ import { BlurView } from "expo-blur";
 import { Stack, useRouter } from "expo-router";
 import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
 import "../global.css";
+import GoogleSignInButton from "./social-auth-buttons/google-sign-in-button";
 
 export default function WelcomeScreen() {
   const router = useRouter();
@@ -85,20 +86,6 @@ export default function WelcomeScreen() {
     <View className="flex-1 bg-background justify-center items-center">
       <Stack.Screen options={{ headerShown: false }} />
 
-      {/* Subtle Background Image with Overlay */}
-      <View className="absolute inset-0 z-0">
-        <Image
-          source="https://lh3.googleusercontent.com/aida-public/AB6AXuC-fafc1zq9EJSKIHybUJ2ygUbnt-mij0dvlDdJbCs1MCQwk_kaieLiwPsyeZD0Ipb6IHqIcq8JjIfbrKAFiak7s8aFwtxlRHN6yJgdFmQ2bcO7Buay9lSlykH8g1R4JrF3upWfBRE2PEuabvmRSPgTEmhDyyecha4n2SSktglvk3XyuYT8X3rzSbAWHvXskl0cq10X162cOhjPPT5dp5G0JOeID_zj52DZ2eyuGmLwo1o7CSuu74cOWNNnDciV1mPMlIBLWHgpNLHJ"
-          contentFit="cover"
-          className="absolute inset-0 opacity-30"
-        />
-        {/* Deep Charcoal Dark Overlay */}
-        <View className="absolute inset-0 bg-background/80" />
-
-        {/* Glow effect in background */}
-        <View className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-secondary/10 opacity-30" />
-      </View>
-
       <ScrollView
         contentContainerClassName="flex-grow justify-center items-center py-10"
         showsVerticalScrollIndicator={false}
@@ -134,7 +121,7 @@ export default function WelcomeScreen() {
                 The high-performance workspace for your habits and goals.
               </Text>
 
-              {/* CTA Primary Button */}
+              {/* CTA Primary Button
               <Animated.View
                 style={{ width: "100%", transform: [{ scale: buttonScale }] }}
               >
@@ -154,14 +141,15 @@ export default function WelcomeScreen() {
               </Animated.View>
 
               {/* Secondary Action */}
-              <Pressable
+              {/* <Pressable
                 onPress={() => router.push("/calendar")}
                 className="mt-6 active:opacity-75"
               >
                 <Text className="text-xs font-semibold tracking-[0.96px] text-on-surface-variant/60 uppercase font-geist">
                   Sign In To Existing Account
                 </Text>
-              </Pressable>
+              </Pressable> */}
+              <GoogleSignInButton />
             </BlurView>
           </View>
         </View>

@@ -29,7 +29,7 @@
       "bundler": "metro"
     },
     "plugins": [
-      ["expo-router", { "origin": "http:/localhost:8081" }],
+      ["expo-router", { "origin": "http://localhost:8081" }],
       [
         "expo-splash-screen",
         {

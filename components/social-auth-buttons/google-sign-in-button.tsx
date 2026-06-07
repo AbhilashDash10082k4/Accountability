@@ -1,7 +1,7 @@
 import { supabase } from "@/lib/supabase";
 import { useEffect } from "react";
 import { TouchableOpacity } from "react-native";
-import * as Linking from "expo-linking";
+
 import { expo } from "@/app.json";
 import { Text } from "@react-navigation/elements";
 import { Image } from "expo-image";
@@ -30,7 +30,7 @@ export default function GoogleSignInButton() {
     const res = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: Linking.createURL("google-auth"),
+        redirectTo: `${expo.scheme}://google-auth`,
         queryParams: { prompt: "consent" },
         skipBrowserRedirect: true,
       },
@@ -45,7 +45,7 @@ export default function GoogleSignInButton() {
 
     const result = await WebBrowser.openAuthSessionAsync(
       googleOAuthUrl,
-      Linking.createURL("google-auth"),
+      `${expo.scheme}://google-auth`,
       { showInRecents: true },
     ).catch((err) => {
       console.error("onSignInButtonPress - openAuthSessionAsync - error", {
@@ -53,7 +53,7 @@ export default function GoogleSignInButton() {
       });
       console.log(err);
     });
-
+    console.log("AUTH RESULT", JSON.stringify(result, null, 2));
     console.debug("onSignInButtonPress - openAuthSessionAsync - result", {
       result,
     });
