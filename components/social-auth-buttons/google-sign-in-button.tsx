@@ -27,6 +27,8 @@ export default function GoogleSignInButton() {
 
   async function onSignInButtonPress() {
     console.debug("onSignInButtonPress - start");
+    console.log("SCHEME =", expo.scheme);
+    console.log("REDIRECT =", `${expo.scheme}://google-auth`);
     const res = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
