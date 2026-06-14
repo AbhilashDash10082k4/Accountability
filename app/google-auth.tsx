@@ -1,4 +1,5 @@
 import { ActivityIndicator, View } from "react-native";
+import { Stack } from "expo-router";
 
 export default function GoogleAuthCallback() {
   return (
@@ -7,9 +8,11 @@ export default function GoogleAuthCallback() {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
+        backgroundColor: "#051424",
       }}
     >
-      <ActivityIndicator />
+      <Stack.Screen options={{ headerShown: false }} />
+      <ActivityIndicator size="large" color="#44e2cd" />
     </View>
   );
 }
