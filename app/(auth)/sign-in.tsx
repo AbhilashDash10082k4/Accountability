@@ -5,9 +5,9 @@ import { BlurView } from "expo-blur";
 import { Stack, useRouter } from "expo-router";
 import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
 import "../global.css";
-import GoogleSignInButton from "./social-auth-buttons/google-sign-in-button";
+import GoogleSignInButton from "@/components/social-auth-buttons/google-sign-in-button";
 
-export default function WelcomeScreen() {
+export default function SignIn() {
   const router = useRouter();
   const [showToast, setShowToast] = useState(false);
   const [isPressed, setIsPressed] = useState(false);

@@ -1,3 +1,4 @@
+/**protects all screens , checks authorized routes */
 import {
   DarkTheme,
   DefaultTheme,
