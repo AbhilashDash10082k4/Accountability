@@ -11,6 +11,7 @@ import * as ExpoCalendar from "expo-calendar";
 import { Stack, useRouter } from "expo-router";
 import { useCallback, useEffect, useState } from "react";
 import { BackHandler, Pressable, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import { mockEvents, monthNames } from "@/constants/mockEvents";
 import { TimelineEvent } from "@/lib/interfaces";
@@ -31,9 +32,9 @@ export default function GoogleCalendarComponent() {
 
   const handlePrevMonth = useCallback(() => {
     setCurrentDate((prev) => {
-      console.log("\nPREV:", prev.toString());
+      //console.log("\nPREV:", prev.toString());
       const prevv = new Date(prev.getFullYear(), prev.getMonth() - 1, 1);
-      console.log("\nNEXT:", prevv.toString());
+      //console.log("\nNEXT:", prevv.toString());
       return prevv;
     });
   }, []);
@@ -44,14 +45,14 @@ export default function GoogleCalendarComponent() {
     });
   }, []);
   useEffect(() => {
-    console.log(
-      "\nVIEW:",
-      viewMode,
-      "\nCURRENT:",
-      currentDate.toString(),
-      "\nSELECTED:",
-      selectedDate.toString(),
-    );
+    //console.log(
+    //   "\nVIEW:",
+    //   viewMode,
+    //   "\nCURRENT:",
+    //   currentDate.toString(),
+    //   "\nSELECTED:",
+    //   selectedDate.toString(),
+    // );
   }, [viewMode, currentDate, selectedDate]);
   // useEffect(() => {
   //   const onBackPress = () => {
@@ -116,7 +117,7 @@ export default function GoogleCalendarComponent() {
           }
         }
       } catch (err) {
-        console.warn("Failed to load device events:", err);
+        //console.warn("Failed to load device events:", err);
       }
     })();
   }, []);
@@ -154,7 +155,7 @@ export default function GoogleCalendarComponent() {
   };
 
   return (
-    <View className="flex-1 bg-background">
+    <SafeAreaView style={{ flex: 1 }} className="bg-background">
       <Stack.Screen
         options={{
           headerShown: false,
@@ -191,87 +192,10 @@ export default function GoogleCalendarComponent() {
       {/* Floating Add Action Button */}
       <Pressable
         onPress={handleAddEvent}
-        className="absolute bottom-24 right-6 w-14 h-14 bg-amber-500 rounded-[20px] shadow-2xl items-center justify-center z-40 active:scale-95 shadow-black/40"
+        className="absolute bottom-6 right-6 w-14 h-14 bg-amber-500 rounded-[20px] shadow-2xl items-center justify-center z-40 active:scale-95 shadow-black/40"
       >
         <Ionicons name="add" size={32} color="#051424" />
       </Pressable>
-
-      {/* Bottom Navigation tab bar */}
-      <View className="absolute bottom-0 left-0 w-full z-50 rounded-t-xl border-t h-20 px-4 flex-row justify-around items-center bg-background/60 border-t-white/10">
-        <BlurView
-          tint="dark"
-          intensity={100}
-          style={{ position: "absolute", top: 0, bottom: 0, left: 0, right: 0 }}
-        />
-
-        <Pressable
-          onPress={() => router.push("/")}
-          className="items-center justify-center w-16 h-12 active:opacity-75"
-        >
-          <MaterialCommunityIcons
-            name="home-outline"
-            size={24}
-            color="rgba(255, 255, 255, 0.4)"
-          />
-          <Text className="text-[10px] font-semibold text-on-surface-variant/40 mt-1 font-geist">
-            Home
-          </Text>
-        </Pressable>
-
-        <Pressable
-          onPress={() => setViewMode("month")}
-          className="items-center justify-center w-16 h-12 active:opacity-75"
-        >
-          <MaterialCommunityIcons
-            name="calendar-month-outline"
-            size={24}
-            color={
-              viewMode === "month" ? "#44e2cd" : "rgba(255, 255, 255, 0.4)"
-            }
-          />
-          <Text
-            className={`text-[10px] font-semibold mt-1 font-geist ${viewMode === "month" ? "text-secondary" : "text-on-surface-variant/40"}`}
-          >
-            Habits
-          </Text>
-        </Pressable>
-
-        <Pressable
-          onPress={() => router.push("/todo")}
-          className="items-center justify-center w-16 h-12 scale-110 active:opacity-75"
-        >
-          <MaterialCommunityIcons
-            name="check-circle"
-            size={24}
-            color="rgba(255, 255, 255, 0.4)"
-          />
-          <Text className="text-[10px] font-semibold text-on-surface-variant/40 mt-1 font-geist">
-            Tasks
-          </Text>
-        </Pressable>
-
-        <Pressable className="items-center justify-center w-16 h-12 active:opacity-75">
-          <MaterialCommunityIcons
-            name="handshake-outline"
-            size={24}
-            color="rgba(255, 255, 255, 0.4)"
-          />
-          <Text className="text-[10px] font-semibold text-on-surface-variant/40 mt-1 font-geist">
-            Partners
-          </Text>
-        </Pressable>
-
-        <Pressable className="items-center justify-center w-16 h-12 active:opacity-75">
-          <MaterialCommunityIcons
-            name="account-outline"
-            size={24}
-            color="rgba(255, 255, 255, 0.4)"
-          />
-          <Text className="text-[10px] font-semibold text-on-surface-variant/40 mt-1 font-geist">
-            Profile
-          </Text>
-        </Pressable>
-      </View>
-    </View>
+    </SafeAreaView>
   );
 }

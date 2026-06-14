@@ -4,7 +4,6 @@ import { Image } from "expo-image";
 import { BlurView } from "expo-blur";
 import { Stack, useRouter } from "expo-router";
 import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
-import "../global.css";
 import GoogleSignInButton from "@/components/social-auth-buttons/google-sign-in-button";
 
 export default function SignIn() {
@@ -77,7 +76,8 @@ export default function SignIn() {
       ]).start(() => {
         setShowToast(false);
         stopPulse();
-        router.push("/calendar");
+        // Navigation handled automatically by Stack.Protected in _layout.tsx
+        // when auth state changes after Google OAuth
       });
     }, 1800);
   };

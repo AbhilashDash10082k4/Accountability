@@ -1,8 +1,8 @@
 import React from "react";
 import { Stack } from "expo-router";
-import GoogleCalendarComponent from "../../components/Calendar/Calendar";
+import GoogleCalendarComponent from "../../../components/Calendar/Calendar";
 
-export default function CalendarScreen() {
+export default function TasksScreen() {
   return (
     <>
       <Stack.Screen options={{ headerShown: false }} />
