@@ -1,0 +1,53 @@
+{
+  "project": "accountability",
+  "description": "Accountability- a discipline-first app designed to transform ambitions into measurable execution",
+  "features": [
+    {
+      "id": "app-launch",
+      "name": "App Launch",
+      "description": "Show the sign in screen with Google Sign In button",
+      "status": "pass",
+      "evidence": "npx expo start first shows the Sign In screen"
+    },
+    {
+      "id": "task-list",
+      "name": "Calendar view",
+      "description": "Shows the Google Calendar view with grid day view",
+      "status": "pass",
+      "evidence": "Google Calendar like view",
+      "testedAt": ""
+    },
+    {
+      "id": "tasks-tab",
+      "name": "Task Tab",
+      "description": "Shows the list of the tasks for the day set in the calendar view. Sets to unfinished tasks of the previous day or sets to empty the next day",
+      "status": "pass",
+      "evidence": "All the daily tasks visible",
+      "testedAt": ""
+    },
+    {
+      "id": "app-block-popup",
+      "name": "App Block Popup",
+      "description": "A popup listing all the installed apps on the device and a checkbox beside the apps to check to block the selected apps. Should double-confirm before blocking the app",
+      "status": "pass",
+      "evidence": "User should be able to upload proofs",
+      "testedAt": ""
+    },
+    {
+      "id": "app-blocking",
+      "name": "App Blocking",
+      "description": "Blocking of selected apps- displaying an overlay over the selected apps after confirmed blocking -both for android and ios.",
+      "status": "pass",
+      "evidence": "User should be able to upload proofs",
+      "testedAt": ""
+    },
+    {
+      "id": "verification-engine",
+      "name": "Verification Engine",
+      "description": "Should verify the proof provided by the user. The placeholder uploading proofs should exist alongside of the tasks in the Task Tab.",
+      "status": "pass",
+      "evidence": "User should be able to upload proofs",
+      "testedAt": ""
+    }
+  ]
+}
